@@ -37,6 +37,6 @@ public class aula_154_PartidaXadrez
 	{				
 		posicionaNovaPeca('B', 6, new aula_152_Torre(tabuleiro, aula_151_Cor.BRANCA) );
 		posicionaNovaPeca('E', 8, new aula_152_Rei(tabuleiro, aula_151_Cor.PRETA) );
-		posicionaNovaPeca('e', 1, new aula_152_Rei(tabuleiro, aula_151_Cor.BRANCA) );
+		posicionaNovaPeca('E', 1, new aula_152_Rei(tabuleiro, aula_151_Cor.BRANCA) );
 	}
 }
