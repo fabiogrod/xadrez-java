@@ -1,6 +1,6 @@
 package aplicacao;
 
-import xadrez.aula_151_PartidaXadrez;
+import xadrez.aula_153_PartidaXadrez;
 
 public class aula_152
 {
@@ -12,7 +12,7 @@ public class aula_152
 //		
 //		aula_150_Tabuleiro tabuleiro = new aula_150_Tabuleiro( 8, 8);
 		
-		aula_151_PartidaXadrez partidaXadrez =  new aula_151_PartidaXadrez();
+		aula_153_PartidaXadrez partidaXadrez =  new aula_153_PartidaXadrez();
 		
 		aula_151_IU.imprimirTabuleiro(partidaXadrez.getPecas());
 	}

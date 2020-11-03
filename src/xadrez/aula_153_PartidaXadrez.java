@@ -1,17 +1,17 @@
 package xadrez;
 
 import tabuleiro.aula_149_Posicao;
-import tabuleiro.aula_152_Tabuleiro;
+import tabuleiro.aula_153_Tabuleiro;
 import xadrez.pecas.aula_152_Rei;
 import xadrez.pecas.aula_152_Torre;
 
-public class aula_152_PartidaXadrez
+public class aula_153_PartidaXadrez
 {
-	private aula_152_Tabuleiro tabuleiro;
+	private aula_153_Tabuleiro tabuleiro;
 	
-	public aula_152_PartidaXadrez()
+	public aula_153_PartidaXadrez()
 	{
-		tabuleiro = new aula_152_Tabuleiro( 8, 8);
+		tabuleiro = new aula_153_Tabuleiro( 8, 8);
 		configInicial();
 	}
 	
@@ -30,9 +30,9 @@ public class aula_152_PartidaXadrez
 	}
 	
 	private void configInicial()
-	{
-//		tabuleiro.posicionarPeca(new aula_152_Torre(tabuleiro, aula_151_Cor.BRANCA), new aula_149_Posicao( 2, 1 ) );
-//		tabuleiro.posicionarPeca(new aula_152_Rei(tabuleiro, aula_151_Cor.PRETA), new aula_149_Posicao( 0, 4 ) );
-//		tabuleiro.posicionarPeca(new aula_152_Rei(tabuleiro, aula_151_Cor.BRANCA), new aula_149_Posicao( 7, 4 ) );
+	{				
+		tabuleiro.posicionarPeca(new aula_152_Torre(tabuleiro, aula_151_Cor.BRANCA), new aula_149_Posicao( 2, 1 ) );
+		tabuleiro.posicionarPeca(new aula_152_Rei(tabuleiro, aula_151_Cor.PRETA), new aula_149_Posicao( 0, 4 ) );
+		tabuleiro.posicionarPeca(new aula_152_Rei(tabuleiro, aula_151_Cor.BRANCA), new aula_149_Posicao( 7, 4 ) );
 	}
 }
