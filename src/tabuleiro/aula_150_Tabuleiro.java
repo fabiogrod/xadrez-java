@@ -12,6 +12,4 @@ public class aula_150_Tabuleiro
 		this.colunas = colunas;
 		pecas = new aula_150_Peca[linhas][colunas]; 
 	}
-	
-	
 }
