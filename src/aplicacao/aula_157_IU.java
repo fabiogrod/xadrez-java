@@ -1,9 +1,13 @@
 package aplicacao;
 
-import xadrez.aula_151_Cor;
-import xadrez.aula_151_PecaXadrez;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-public class aula_155_IU
+import xadrez.aula_151_Cor;
+import xadrez.aula_156_PecaXadrez;
+import xadrez.aula_154_PosicionamentoXadrez;
+
+public class aula_157_IU
 {	
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 
@@ -26,7 +30,30 @@ public class aula_155_IU
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 	
-	public static void imprimirTabuleiro(aula_151_PecaXadrez[][] pecas)
+	// https://stackoverflow.com/questions/2979383/java-clear-the-console
+	public static void limpaTela()
+	{
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+	
+	public static aula_154_PosicionamentoXadrez verificarPosicionamentoXadrez(Scanner sc)
+	{
+		try
+		{
+			String s = sc.nextLine();
+			char coluna = s.charAt(0);
+			
+			int linha = Integer.parseInt(s.substring(1));
+			return new aula_154_PosicionamentoXadrez(coluna, linha);
+		}
+		catch(RuntimeException e)
+		{
+			throw new InputMismatchException("Erro ao verificar posição no xadrez: Valores válidos são de a1 até h8");
+		}
+	}
+	
+	public static void imprimirTabuleiro(aula_156_PecaXadrez[][] pecas)
 	{
 		System.out.println();
 		for (int i =0; i< pecas.length; i++)
@@ -41,7 +68,7 @@ public class aula_155_IU
 		System.out.println("  A B C D E F G H");
 	}
 	
-	private static void imprimirPeca(aula_151_PecaXadrez peca)
+	private static void imprimirPeca(aula_156_PecaXadrez peca)
 	{
 		if (peca == null)
 		{
