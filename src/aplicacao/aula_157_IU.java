@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import xadrez.aula_151_Cor;
-import xadrez.aula_156_PecaXadrez;
+import xadrez.aula_157_PecaXadrez;
 import xadrez.aula_154_PosicionamentoXadrez;
 
 public class aula_157_IU
@@ -49,11 +49,11 @@ public class aula_157_IU
 		}
 		catch(RuntimeException e)
 		{
-			throw new InputMismatchException("Erro ao verificar posiÁ„o no xadrez: Valores v·lidos s„o de a1 atÈ h8");
+			throw new InputMismatchException("Erro ao verificar posi√ß√£o no xadrez: Valores v√°lidos s√£o de A1 at√© H8");
 		}
 	}
 	
-	public static void imprimirTabuleiro(aula_156_PecaXadrez[][] pecas)
+	public static void imprimirTabuleiro(aula_157_PecaXadrez[][] pecas)
 	{
 		System.out.println();
 		for (int i =0; i< pecas.length; i++)
@@ -68,7 +68,7 @@ public class aula_157_IU
 		System.out.println("  A B C D E F G H");
 	}
 	
-	private static void imprimirPeca(aula_156_PecaXadrez peca)
+	private static void imprimirPeca(aula_157_PecaXadrez peca)
 	{
 		if (peca == null)
 		{

@@ -1,12 +1,13 @@
 package aplicacao;
 
 import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Scanner;
 
 import xadrez.aula_154_PosicionamentoXadrez;
 import xadrez.aula_156_ExcecaoXadrez;
-import xadrez.aula_156_PartidaXadrez;
-import xadrez.aula_156_PecaXadrez;
+import xadrez.aula_157_PartidaXadrez;
+import xadrez.aula_157_PecaXadrez;
 
 public class aula_157
 {
@@ -18,10 +19,10 @@ public class aula_157
 //		
 //		aula_150_Tabuleiro tabuleiro = new aula_150_Tabuleiro( 8, 8);
 		
-//		Locale.setDefault(new Locale("pt","BR") );
+		Locale.setDefault(new Locale("pt","BR") );
 		
 		Scanner sc = new Scanner(System.in);
-		aula_156_PartidaXadrez partidaXadrez =  new aula_156_PartidaXadrez();
+		aula_157_PartidaXadrez partidaXadrez =  new aula_157_PartidaXadrez();
 		
 		while (true)
 		{
@@ -38,11 +39,11 @@ public class aula_157
 				System.out.print("Destino: ");
 				aula_154_PosicionamentoXadrez destino = aula_157_IU.verificarPosicionamentoXadrez(sc);
 				
-				aula_156_PecaXadrez pecaCapturada = partidaXadrez.verificarMovimentoPeca(origem, destino);
+				aula_157_PecaXadrez pecaCapturada = partidaXadrez.verificarMovimentoPeca(origem, destino);
 			}
 			catch(aula_156_ExcecaoXadrez e)
 			{
-				System.out.println(e.getMessage());
+				System.out.println(e.getMessage());				
 				sc.nextLine();
 			}
 			catch(InputMismatchException e)

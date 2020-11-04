@@ -11,7 +11,7 @@ public class aula_154_PosicionamentoXadrez
 	{
 		if  (coluna < 'a' || coluna > 'h' || linha < 1 || linha > 8)
 		{
-			throw new aula_156_ExcecaoXadrez("Erro ao instanciar: Valores v·lidos s„o de A1 a H8");
+			throw new aula_156_ExcecaoXadrez("Erro ao instanciar: Valores v√°lidos s√£o de A1 a H8");
 		}
 		
 		this.coluna = coluna;
