@@ -1,13 +1,13 @@
 package tabuleiro;
 
-public class aula_149_Posicao
+public class aula_159_Posicao
 {
 	private int linha;
 	private int coluna;
 	
-	public aula_149_Posicao(){}
+	public aula_159_Posicao(){}
 
-	public aula_149_Posicao(int linha, int coluna)
+	public aula_159_Posicao(int linha, int coluna)
 	{
 		this.linha = linha;
 		this.coluna = coluna;
@@ -26,6 +26,12 @@ public class aula_149_Posicao
 	}
 
 	public void setColuna(int coluna) {
+		this.coluna = coluna;
+	}
+	
+	public void setValores(int linha, int coluna)
+	{
+		this.linha = linha;
 		this.coluna = coluna;
 	}
 

@@ -2,7 +2,7 @@ package tabuleiro;
 
 public abstract class aula_157_Peca
 {
-	protected aula_149_Posicao posicao;
+	protected aula_159_Posicao posicao;
 	private aula_156_Tabuleiro tabuleiro;
 	
 	public aula_157_Peca() {};
@@ -19,7 +19,7 @@ public abstract class aula_157_Peca
 	
 	public abstract boolean[][] movimentosPossiveis();
 	
-	public boolean movimentoPossivel(aula_149_Posicao posicao)
+	public boolean movimentoPossivel(aula_159_Posicao posicao)
 	{
 		return movimentosPossiveis()[posicao.getLinha()][posicao.getColuna()];
 	}

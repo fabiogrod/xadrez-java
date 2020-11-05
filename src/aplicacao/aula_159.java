@@ -6,23 +6,23 @@ import java.util.Scanner;
 
 import xadrez.aula_154_PosicionamentoXadrez;
 import xadrez.aula_156_ExcecaoXadrez;
-import xadrez.aula_157_PartidaXadrez;
-import xadrez.aula_157_PecaXadrez;
+import xadrez.aula_159_PartidaXadrez;
+import xadrez.aula_159_PecaXadrez;
 
-public class aula_157
+public class aula_159
 {
 	public static void main(String[] args)
 	{
 //		aula_149_Posicao pos = new aula_149_Posicao(3,5); 
 //		
-//		System.out.println("Vai filhão!! - " + pos);
+//		System.out.println("Vai filhï¿½o!! - " + pos);
 //		
 //		aula_150_Tabuleiro tabuleiro = new aula_150_Tabuleiro( 8, 8);
 		
 		Locale.setDefault(new Locale("pt","BR") );
 		
 		Scanner sc = new Scanner(System.in);
-		aula_157_PartidaXadrez partidaXadrez =  new aula_157_PartidaXadrez();
+		aula_159_PartidaXadrez partidaXadrez =  new aula_159_PartidaXadrez();
 		
 		while (true)
 		{
@@ -39,7 +39,7 @@ public class aula_157
 				System.out.print("Destino: ");
 				aula_154_PosicionamentoXadrez destino = aula_157_IU.verificarPosicionamentoXadrez(sc);
 				
-				aula_157_PecaXadrez pecaCapturada = partidaXadrez.verificarMovimentoPeca(origem, destino);
+				aula_159_PecaXadrez pecaCapturada = partidaXadrez.verificarMovimentoPeca(origem, destino);
 			}
 			catch(aula_156_ExcecaoXadrez e)
 			{

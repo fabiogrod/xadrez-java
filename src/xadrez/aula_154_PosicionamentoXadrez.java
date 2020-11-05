@@ -1,6 +1,6 @@
 package xadrez;
 
-import tabuleiro.aula_149_Posicao;
+import tabuleiro.aula_159_Posicao;
 
 public class aula_154_PosicionamentoXadrez
 {
@@ -26,12 +26,12 @@ public class aula_154_PosicionamentoXadrez
 		return linha;
 	}
 	
-	protected aula_149_Posicao convertePosicao()
+	protected aula_159_Posicao convertePosicao()
 	{
-		return new aula_149_Posicao(8 - linha, coluna - 'a');
+		return new aula_159_Posicao(8 - linha, coluna - 'a');
 	}
 	
-	protected aula_154_PosicionamentoXadrez converteMatriz(aula_149_Posicao posicao)
+	protected aula_154_PosicionamentoXadrez converteMatriz(aula_159_Posicao posicao)
 	{
 		return new aula_154_PosicionamentoXadrez( (char)('a' - posicao.getColuna()) , 8 -  posicao.getLinha() );
 	}

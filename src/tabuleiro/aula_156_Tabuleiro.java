@@ -35,7 +35,7 @@ public class aula_156_Tabuleiro
 		return pecas[linha][coluna];
 	}
 	
-	public aula_157_Peca peca(aula_149_Posicao posicao)
+	public aula_157_Peca peca(aula_159_Posicao posicao)
 	{
 		if (!posicaoExistente(posicao))
 		{
@@ -44,7 +44,7 @@ public class aula_156_Tabuleiro
 		return pecas[posicao.getLinha() ][posicao.getColuna() ];
 	}
 	
-	public void posicionarPeca(aula_157_Peca peca, aula_149_Posicao posicao)
+	public void posicionarPeca(aula_157_Peca peca, aula_159_Posicao posicao)
 	{
 		if (pecaExistente(posicao))
 		{
@@ -54,7 +54,7 @@ public class aula_156_Tabuleiro
 		peca.posicao = posicao;
 	}
 	
-	public aula_157_Peca removerPeca(aula_149_Posicao posicao)
+	public aula_157_Peca removerPeca(aula_159_Posicao posicao)
 	{
 		if (!posicaoExistente(posicao))
 		{
@@ -78,12 +78,12 @@ public class aula_156_Tabuleiro
 		return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas;
 	}
 	
-	public boolean posicaoExistente(aula_149_Posicao posicao)
+	public boolean posicaoExistente(aula_159_Posicao posicao)
 	{
 		return posicaoExistente(posicao.getLinha(), posicao.getColuna());
 	}
 	
-	public boolean pecaExistente(aula_149_Posicao posicao)
+	public boolean pecaExistente(aula_159_Posicao posicao)
 	{
 		if (!posicaoExistente(posicao))
 		{
