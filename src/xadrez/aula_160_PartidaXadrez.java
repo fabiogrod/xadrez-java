@@ -3,7 +3,7 @@ package xadrez;
 import tabuleiro.aula_159_Posicao;
 import tabuleiro.aula_157_Peca;
 import tabuleiro.aula_156_Tabuleiro;
-import xadrez.pecas.aula_157_Rei;
+import xadrez.pecas.aula_161_Rei;
 import xadrez.pecas.aula_159_Torre;
 
 public class aula_160_PartidaXadrez
@@ -92,13 +92,13 @@ public class aula_160_PartidaXadrez
         posicionaNovaPeca('d', 2, new aula_159_Torre(tabuleiro, aula_151_Cor.BRANCA));
         posicionaNovaPeca('e', 2, new aula_159_Torre(tabuleiro, aula_151_Cor.BRANCA));
         posicionaNovaPeca('e', 1, new aula_159_Torre(tabuleiro, aula_151_Cor.BRANCA));
-        posicionaNovaPeca('d', 1, new aula_157_Rei(tabuleiro, aula_151_Cor.BRANCA));
+        posicionaNovaPeca('d', 1, new aula_161_Rei(tabuleiro, aula_151_Cor.BRANCA));
 
         posicionaNovaPeca('c', 7, new aula_159_Torre(tabuleiro, aula_151_Cor.PRETA));
         posicionaNovaPeca('c', 8, new aula_159_Torre(tabuleiro, aula_151_Cor.PRETA));
         posicionaNovaPeca('d', 7, new aula_159_Torre(tabuleiro, aula_151_Cor.PRETA));
         posicionaNovaPeca('e', 7, new aula_159_Torre(tabuleiro, aula_151_Cor.PRETA));
         posicionaNovaPeca('e', 8, new aula_159_Torre(tabuleiro, aula_151_Cor.PRETA));
-        posicionaNovaPeca('d', 8, new aula_157_Rei(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('d', 8, new aula_161_Rei(tabuleiro, aula_151_Cor.PRETA));
 	}
 }
