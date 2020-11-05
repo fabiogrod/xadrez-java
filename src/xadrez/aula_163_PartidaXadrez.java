@@ -1,18 +1,24 @@
 package xadrez;
 
-import tabuleiro.aula_159_Posicao;
-import tabuleiro.aula_157_Peca;
-import tabuleiro.aula_156_Tabuleiro;
-import xadrez.pecas.aula_161_Rei;
-import xadrez.pecas.aula_159_Torre;
+import java.util.ArrayList;
+import java.util.List;
 
-public class aula_162_PartidaXadrez
+import tabuleiro.aula_156_Tabuleiro;
+import tabuleiro.aula_157_Peca;
+import tabuleiro.aula_159_Posicao;
+import xadrez.pecas.aula_159_Torre;
+import xadrez.pecas.aula_161_Rei;
+
+public class aula_163_PartidaXadrez
 {
 	private int turno;
 	private aula_151_Cor jogadorAtual;
 	private aula_156_Tabuleiro tabuleiro;
 	
-	public aula_162_PartidaXadrez()
+	private List<aula_157_Peca> pecasTabuleiro  = new ArrayList<>();
+	private List<aula_157_Peca> pecasCapturadas  = new ArrayList<>();
+	
+	public aula_163_PartidaXadrez()
 	{
 		tabuleiro = new aula_156_Tabuleiro( 8, 8);
 		turno = 1;
@@ -64,11 +70,17 @@ public class aula_162_PartidaXadrez
 	
 	private aula_157_Peca realizarMovimento(aula_159_Posicao origem, aula_159_Posicao destino)
 	{
-		aula_157_Peca p = tabuleiro.removerPeca(origem);
-		aula_157_Peca pc = tabuleiro.removerPeca(destino);
+		aula_157_Peca peca = tabuleiro.removerPeca(origem);
+		aula_157_Peca pecaCapturada = tabuleiro.removerPeca(destino);
+		tabuleiro.posicionarPeca(peca, destino);
 		
-		tabuleiro.posicionarPeca(p, destino);
-		return pc;
+		if (pecaCapturada != null)
+		{
+			pecasTabuleiro.remove(pecaCapturada);
+			pecasCapturadas.add(pecaCapturada);
+		}
+		
+		return pecaCapturada;
 	}
 	
 	private void validarPosicaoOrigem(aula_159_Posicao posicao)
@@ -100,6 +112,7 @@ public class aula_162_PartidaXadrez
 	private void posicionaNovaPeca(char coluna, int linha, aula_159_PecaXadrez peca)
 	{
 		tabuleiro.posicionarPeca(peca, new aula_154_PosicionamentoXadrez(coluna, linha).convertePosicao() );
+		pecasTabuleiro.add(peca);
 	}
 	
 	private void proximoTurno()

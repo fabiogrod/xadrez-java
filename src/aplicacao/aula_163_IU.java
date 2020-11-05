@@ -1,14 +1,17 @@
 package aplicacao;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import xadrez.aula_151_Cor;
 import xadrez.aula_159_PecaXadrez;
-import xadrez.aula_162_PartidaXadrez;
+import xadrez.aula_163_PartidaXadrez;
 import xadrez.aula_154_PosicionamentoXadrez;
 
-public class aula_162_IU
+public class aula_163_IU
 {	
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 
@@ -54,11 +57,12 @@ public class aula_162_IU
 		}
 	}
 	
-	public static void imprimirPartida(aula_162_PartidaXadrez partidaXadrez)
+	public static void imprimirPartida(aula_163_PartidaXadrez partidaXadrez, List<aula_159_PecaXadrez> capturas)
 	{
-		imprimirTabuleiro(partidaXadrez.getPecas());		
+		imprimirTabuleiro(partidaXadrez.getPecas());
+		imprimirPeçasCapturadas(capturas);
 		System.out.println("\nTurno: " + partidaXadrez.getTurno());
-		System.out.println("Aguardando jogador:" + partidaXadrez.getJogadorAtual());
+		System.out.println("Aguardando jogador: " + partidaXadrez.getJogadorAtual());
 	}
 	
 	public static void imprimirTabuleiro(aula_159_PecaXadrez[][] pecas)
@@ -112,5 +116,22 @@ public class aula_162_IU
             }
 		}
 		System.out.print(" ");
+	}
+	
+	private static void imprimirPeçasCapturadas(List<aula_159_PecaXadrez> capturas)
+	{
+		List<aula_159_PecaXadrez> brancas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.BRANCA).collect(Collectors.toList());
+		List<aula_159_PecaXadrez> pretas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.PRETA).collect(Collectors.toList());
+		
+		System.out.println("\nPeças capturadas");
+		System.out.print("Brancas: ");
+		System.out.print(ANSI_WHITE);
+		System.out.println( Arrays.toString( brancas.toArray() ) );
+		System.out.print(ANSI_RESET);
+		
+		System.out.print("Pretas: ");
+		System.out.print(ANSI_YELLOW);
+		System.out.println( Arrays.toString( pretas.toArray() ) );
+		System.out.print(ANSI_RESET);
 	}
 }
