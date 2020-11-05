@@ -6,11 +6,11 @@ import tabuleiro.aula_156_Tabuleiro;
 import xadrez.pecas.aula_157_Rei;
 import xadrez.pecas.aula_159_Torre;
 
-public class aula_159_PartidaXadrez
+public class aula_160_PartidaXadrez
 {
 	private aula_156_Tabuleiro tabuleiro;
 	
-	public aula_159_PartidaXadrez()
+	public aula_160_PartidaXadrez()
 	{
 		tabuleiro = new aula_156_Tabuleiro( 8, 8);
 		configInicial();
@@ -28,6 +28,13 @@ public class aula_159_PartidaXadrez
 			}
 		}
 		return matriz;
+	}
+	
+	public boolean[][] movimentosPossiveis(aula_154_PosicionamentoXadrez posicaoOrigem)
+	{
+		aula_159_Posicao posicao = posicaoOrigem.convertePosicao();
+		validarPosicaoOrigem(posicao);
+		return tabuleiro.peca(posicao).movimentosPossiveis();
 	}
 	
 	public aula_159_PecaXadrez verificarMovimentoPeca(aula_154_PosicionamentoXadrez posicaoOrigem, aula_154_PosicionamentoXadrez posicaoDestino)

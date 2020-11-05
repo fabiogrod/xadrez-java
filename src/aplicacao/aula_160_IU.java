@@ -7,7 +7,7 @@ import xadrez.aula_151_Cor;
 import xadrez.aula_159_PecaXadrez;
 import xadrez.aula_154_PosicionamentoXadrez;
 
-public class aula_157_IU
+public class aula_160_IU
 {	
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 
@@ -61,18 +61,38 @@ public class aula_157_IU
 			System.out.print( (8-i) + " ");
 			for (int j =0; j< pecas.length; j++)
 			{
-				imprimirPeca(pecas[i][j]);
+				imprimirPeca(pecas[i][j], false);
 			}
 			System.out.println();
 		}
 		System.out.println("  A B C D E F G H");
-	}
+	}	
 	
-	private static void imprimirPeca(aula_159_PecaXadrez peca)
+	public static void imprimirTabuleiro(aula_159_PecaXadrez[][] pecas, boolean[][] movimentosPossiveis)
 	{
+		System.out.println();
+		for (int i =0; i< pecas.length; i++)
+		{
+			System.out.print( (8-i) + " ");
+			for (int j =0; j< pecas.length; j++)
+			{
+				imprimirPeca(pecas[i][j], movimentosPossiveis[i][j]);
+			}
+			System.out.println();
+		}
+		System.out.println("  A B C D E F G H");
+	}	
+	
+	private static void imprimirPeca(aula_159_PecaXadrez peca, boolean fundo)
+	{
+		if (fundo)
+		{
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
+		
 		if (peca == null)
 		{
-			System.out.print("-");
+			System.out.print("-" + ANSI_RESET);
 		}
 		else
 		{
