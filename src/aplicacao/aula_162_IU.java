@@ -5,9 +5,10 @@ import java.util.Scanner;
 
 import xadrez.aula_151_Cor;
 import xadrez.aula_159_PecaXadrez;
+import xadrez.aula_162_PartidaXadrez;
 import xadrez.aula_154_PosicionamentoXadrez;
 
-public class aula_160_IU
+public class aula_162_IU
 {	
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 
@@ -51,6 +52,13 @@ public class aula_160_IU
 		{
 			throw new InputMismatchException("Erro ao verificar posição no xadrez: Valores válidos são de A1 até H8");
 		}
+	}
+	
+	public static void imprimirPartida(aula_162_PartidaXadrez partidaXadrez)
+	{
+		imprimirTabuleiro(partidaXadrez.getPecas());		
+		System.out.println("\nTurno: " + partidaXadrez.getTurno());
+		System.out.println("Aguardando jogador:" + partidaXadrez.getJogadorAtual());
 	}
 	
 	public static void imprimirTabuleiro(aula_159_PecaXadrez[][] pecas)

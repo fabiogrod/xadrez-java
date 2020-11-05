@@ -6,13 +6,17 @@ import tabuleiro.aula_156_Tabuleiro;
 import xadrez.pecas.aula_161_Rei;
 import xadrez.pecas.aula_159_Torre;
 
-public class aula_160_PartidaXadrez
+public class aula_162_PartidaXadrez
 {
+	private int turno;
+	private aula_151_Cor jogadorAtual;
 	private aula_156_Tabuleiro tabuleiro;
 	
-	public aula_160_PartidaXadrez()
+	public aula_162_PartidaXadrez()
 	{
 		tabuleiro = new aula_156_Tabuleiro( 8, 8);
+		turno = 1;
+		jogadorAtual = aula_151_Cor.BRANCA;
 		configInicial();
 	}
 	
@@ -30,6 +34,16 @@ public class aula_160_PartidaXadrez
 		return matriz;
 	}
 	
+	public int getTurno()
+	{
+		return turno;
+	}
+	
+	public aula_151_Cor getJogadorAtual()
+	{
+		return jogadorAtual;
+	}
+	
 	public boolean[][] movimentosPossiveis(aula_154_PosicionamentoXadrez posicaoOrigem)
 	{
 		aula_159_Posicao posicao = posicaoOrigem.convertePosicao();
@@ -37,13 +51,14 @@ public class aula_160_PartidaXadrez
 		return tabuleiro.peca(posicao).movimentosPossiveis();
 	}
 	
-	public aula_159_PecaXadrez verificarMovimentoPeca(aula_154_PosicionamentoXadrez posicaoOrigem, aula_154_PosicionamentoXadrez posicaoDestino)
+	public aula_159_PecaXadrez realizaMovimentoPeca(aula_154_PosicionamentoXadrez posicaoOrigem, aula_154_PosicionamentoXadrez posicaoDestino)
 	{
 		aula_159_Posicao origem = posicaoOrigem.convertePosicao();
 		aula_159_Posicao destino =  posicaoDestino.convertePosicao();
 		validarPosicaoOrigem(origem);
 		validarPosicaoDestino(origem, destino);
 		aula_157_Peca pecaCapturada = realizarMovimento(origem, destino);
+		proximoTurno();
 		return (aula_159_PecaXadrez) pecaCapturada;		
 	}
 	
@@ -62,6 +77,12 @@ public class aula_160_PartidaXadrez
 		{
 			throw new aula_156_ExcecaoXadrez("Não existe peça na posição de origem");
 		}
+		
+		if (jogadorAtual != ((aula_159_PecaXadrez)tabuleiro.peca(posicao)).getCor() )
+		{
+			throw new aula_156_ExcecaoXadrez("A peça escolhida não é sua");
+		}
+		
 		if(!tabuleiro.peca(posicao).haAlgumMovimentoPossivel())
 		{
 			throw new aula_156_ExcecaoXadrez("Não existe movimento possível para a peça selecionada");
@@ -79,6 +100,12 @@ public class aula_160_PartidaXadrez
 	private void posicionaNovaPeca(char coluna, int linha, aula_159_PecaXadrez peca)
 	{
 		tabuleiro.posicionarPeca(peca, new aula_154_PosicionamentoXadrez(coluna, linha).convertePosicao() );
+	}
+	
+	private void proximoTurno()
+	{
+		turno++;
+		jogadorAtual = (jogadorAtual == aula_151_Cor.BRANCA) ? aula_151_Cor.PRETA : aula_151_Cor.BRANCA;
 	}
 	
 	private void configInicial()
