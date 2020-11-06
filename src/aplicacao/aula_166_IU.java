@@ -7,8 +7,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import xadrez.aula_151_Cor;
-import xadrez.aula_164_PecaXadrez;
-import xadrez.aula_166_PartidaXadrez;
+import xadrez.aula_167_PecaXadrez;
+import xadrez.aula_167_PartidaXadrez;
 import xadrez.aula_154_PosicionamentoXadrez;
 
 public class aula_166_IU
@@ -57,7 +57,7 @@ public class aula_166_IU
 		}
 	}
 	
-	public static void imprimirPartida(aula_166_PartidaXadrez partidaXadrez, List<aula_164_PecaXadrez> capturas)
+	public static void imprimirPartida(aula_167_PartidaXadrez partidaXadrez, List<aula_167_PecaXadrez> capturas)
 	{
 		imprimirTabuleiro(partidaXadrez.getPecas());
 		imprimirPeçasCapturadas(capturas);
@@ -79,7 +79,7 @@ public class aula_166_IU
 		}
 	}
 	
-	public static void imprimirTabuleiro(aula_164_PecaXadrez[][] pecas)
+	public static void imprimirTabuleiro(aula_167_PecaXadrez[][] pecas)
 	{
 		System.out.println();
 		for (int i =0; i< pecas.length; i++)
@@ -94,7 +94,7 @@ public class aula_166_IU
 		System.out.println("  A B C D E F G H");
 	}	
 	
-	public static void imprimirTabuleiro(aula_164_PecaXadrez[][] pecas, boolean[][] movimentosPossiveis)
+	public static void imprimirTabuleiro(aula_167_PecaXadrez[][] pecas, boolean[][] movimentosPossiveis)
 	{
 		System.out.println();
 		for (int i =0; i< pecas.length; i++)
@@ -109,7 +109,7 @@ public class aula_166_IU
 		System.out.println("  A B C D E F G H");
 	}	
 	
-	private static void imprimirPeca(aula_164_PecaXadrez peca, boolean fundo)
+	private static void imprimirPeca(aula_167_PecaXadrez peca, boolean fundo)
 	{
 		if (fundo)
 		{
@@ -132,10 +132,10 @@ public class aula_166_IU
 		System.out.print(" ");
 	}
 	
-	private static void imprimirPeçasCapturadas(List<aula_164_PecaXadrez> capturas)
+	private static void imprimirPeçasCapturadas(List<aula_167_PecaXadrez> capturas)
 	{
-		List<aula_164_PecaXadrez> brancas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.BRANCA).collect(Collectors.toList());
-		List<aula_164_PecaXadrez> pretas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.PRETA).collect(Collectors.toList());
+		List<aula_167_PecaXadrez> brancas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.BRANCA).collect(Collectors.toList());
+		List<aula_167_PecaXadrez> pretas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.PRETA).collect(Collectors.toList());
 		
 		System.out.println("\nPeças capturadas");
 		System.out.print("Brancas: ");

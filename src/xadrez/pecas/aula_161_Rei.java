@@ -4,9 +4,9 @@ import tabuleiro.aula_156_Tabuleiro;
 import tabuleiro.aula_157_Peca;
 import tabuleiro.aula_159_Posicao;
 import xadrez.aula_151_Cor;
-import xadrez.aula_164_PecaXadrez;
+import xadrez.aula_167_PecaXadrez;
 
-public class aula_161_Rei extends aula_164_PecaXadrez
+public class aula_161_Rei extends aula_167_PecaXadrez
 {
 	public aula_161_Rei ( aula_156_Tabuleiro tabuleiro, aula_151_Cor cor)
 	{
@@ -21,7 +21,7 @@ public class aula_161_Rei extends aula_164_PecaXadrez
 	
 	private boolean permiteMovimento(aula_159_Posicao posicao)
 	{
-		aula_164_PecaXadrez p = (aula_164_PecaXadrez)getTabuleiro().peca(posicao);
+		aula_167_PecaXadrez p = (aula_167_PecaXadrez)getTabuleiro().peca(posicao);
 		
 		return p == null || p.getCor() != getCor();
 	}

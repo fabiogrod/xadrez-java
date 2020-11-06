@@ -9,8 +9,9 @@ import tabuleiro.aula_157_Peca;
 import tabuleiro.aula_159_Posicao;
 import xadrez.pecas.aula_159_Torre;
 import xadrez.pecas.aula_161_Rei;
+import xadrez.aula_167_PartidaXadrez;
 
-public class aula_166_PartidaXadrez
+public class aula_167_PartidaXadrez
 {
 	private int turno;
 	private aula_151_Cor jogadorAtual;
@@ -21,7 +22,7 @@ public class aula_166_PartidaXadrez
 	private List<aula_157_Peca> pecasTabuleiro  = new ArrayList<>();
 	private List<aula_157_Peca> pecasCapturadas  = new ArrayList<>();
 	
-	public aula_166_PartidaXadrez()
+	public aula_167_PartidaXadrez()
 	{
 		tabuleiro = new aula_156_Tabuleiro( 8, 8);
 		turno = 1;
@@ -30,15 +31,15 @@ public class aula_166_PartidaXadrez
 		configInicial();
 	}
 	
-	public aula_164_PecaXadrez[][] getPecas()
+	public aula_167_PecaXadrez[][] getPecas()
 	{
-		aula_164_PecaXadrez[][] matriz = new aula_164_PecaXadrez[tabuleiro.getLinhas() ][tabuleiro.getColunas() ];
+		aula_167_PecaXadrez[][] matriz = new aula_167_PecaXadrez[tabuleiro.getLinhas() ][tabuleiro.getColunas() ];
 		
 		for (int i =0; i< tabuleiro.getLinhas(); i++)
 		{
 			for (int j =0; j< tabuleiro.getColunas(); j++)
 			{
-				matriz[i][j] = (aula_164_PecaXadrez)tabuleiro.peca(i,j);
+				matriz[i][j] = (aula_167_PecaXadrez)tabuleiro.peca(i,j);
 			}
 		}
 		return matriz;
@@ -71,7 +72,7 @@ public class aula_166_PartidaXadrez
 		return tabuleiro.peca(posicao).movimentosPossiveis();
 	}
 	
-	public aula_164_PecaXadrez realizarMovimentoXadrez(aula_154_PosicionamentoXadrez posicaoOrigem, aula_154_PosicionamentoXadrez posicaoDestino)
+	public aula_167_PecaXadrez realizarMovimentoXadrez(aula_154_PosicionamentoXadrez posicaoOrigem, aula_154_PosicionamentoXadrez posicaoDestino)
 	{
 		aula_159_Posicao origem = posicaoOrigem.convertePosicao();
 		aula_159_Posicao destino =  posicaoDestino.convertePosicao();
@@ -96,12 +97,13 @@ public class aula_166_PartidaXadrez
 			proximoTurno();
 		}		
 		
-		return (aula_164_PecaXadrez) pecaCapturada;		
+		return (aula_167_PecaXadrez) pecaCapturada;		
 	}
 	
 	private aula_157_Peca realizarMovimento(aula_159_Posicao origem, aula_159_Posicao destino)
 	{
-		aula_157_Peca peca = tabuleiro.removerPeca(origem);
+		aula_167_PecaXadrez peca = (aula_167_PecaXadrez)tabuleiro.removerPeca(origem);
+		peca.somarContagemMovimentos();
 		aula_157_Peca pecaCapturada = tabuleiro.removerPeca(destino);
 		tabuleiro.posicionarPeca(peca, destino);
 		
@@ -115,8 +117,9 @@ public class aula_166_PartidaXadrez
 	
 	private void desfazerMovimento(aula_159_Posicao origem, aula_159_Posicao destino, aula_157_Peca pecaCapturada)
 	{
-		aula_157_Peca p = tabuleiro.removerPeca(destino);
-		tabuleiro.posicionarPeca(p, origem);
+		aula_167_PecaXadrez peca = (aula_167_PecaXadrez)tabuleiro.removerPeca(destino);
+		
+		tabuleiro.posicionarPeca(peca, origem);
 		
 		if(pecaCapturada != null)
 		{
@@ -133,7 +136,7 @@ public class aula_166_PartidaXadrez
 			throw new aula_156_ExcecaoXadrez("Não existe peça na posição de origem");
 		}
 		
-		if (jogadorAtual != ((aula_164_PecaXadrez)tabuleiro.peca(posicao)).getCor() )
+		if (jogadorAtual != ((aula_167_PecaXadrez)tabuleiro.peca(posicao)).getCor() )
 		{
 			throw new aula_156_ExcecaoXadrez("A peça escolhida não é sua");
 		}
@@ -157,15 +160,15 @@ public class aula_166_PartidaXadrez
 		return (cor == aula_151_Cor.BRANCA) ? aula_151_Cor.PRETA : aula_151_Cor.BRANCA;
 	}
 	
-	private aula_164_PecaXadrez rei(aula_151_Cor cor)
+	private aula_167_PecaXadrez rei(aula_151_Cor cor)
 	{
-		List<aula_157_Peca> lista = pecasTabuleiro.stream().filter(x -> ((aula_164_PecaXadrez)x).getCor() == cor ).collect(Collectors.toList());
+		List<aula_157_Peca> lista = pecasTabuleiro.stream().filter(x -> ((aula_167_PecaXadrez)x).getCor() == cor ).collect(Collectors.toList());
 		
 		for (aula_157_Peca p : lista)
 		{
 			if (p instanceof aula_161_Rei)
 			{
-				return (aula_164_PecaXadrez)p;
+				return (aula_167_PecaXadrez)p;
 			}
 		}
 		throw new IllegalStateException("Não existe o rei da cor"+ cor +" no tabuleiro");
@@ -174,7 +177,7 @@ public class aula_166_PartidaXadrez
 	private boolean testeXeque(aula_151_Cor cor)
 	{
 		aula_159_Posicao posicaoRei = rei(cor).getPosicionamentoXadrez().convertePosicao();
-		List<aula_157_Peca> pecasOponente = pecasTabuleiro.stream().filter(x -> ((aula_164_PecaXadrez)x).getCor() == oponente(cor) ).collect(Collectors.toList());
+		List<aula_157_Peca> pecasOponente = pecasTabuleiro.stream().filter(x -> ((aula_167_PecaXadrez)x).getCor() == oponente(cor) ).collect(Collectors.toList());
 		
 		for (aula_157_Peca p : pecasOponente)
 		{
@@ -193,7 +196,7 @@ public class aula_166_PartidaXadrez
 		{
 			return false;
 		}
-		List<aula_157_Peca> lista = pecasTabuleiro.stream().filter(x -> ((aula_164_PecaXadrez)x).getCor() == cor) .collect(Collectors.toList());
+		List<aula_157_Peca> lista = pecasTabuleiro.stream().filter(x -> ((aula_167_PecaXadrez)x).getCor() == cor) .collect(Collectors.toList());
 		
 		for(aula_157_Peca p : lista)
 		{
@@ -204,7 +207,7 @@ public class aula_166_PartidaXadrez
 				{
 					if(matriz[i][j])
 					{
-						aula_159_Posicao origem = ((aula_164_PecaXadrez)p).getPosicionamentoXadrez().convertePosicao();
+						aula_159_Posicao origem = ((aula_167_PecaXadrez)p).getPosicionamentoXadrez().convertePosicao();
 						aula_159_Posicao destino = new aula_159_Posicao( i, j);
 						aula_157_Peca pecaCapturada = realizarMovimento(origem, destino);
 						boolean testeXeque = testeXeque(cor);
@@ -220,7 +223,7 @@ public class aula_166_PartidaXadrez
 		return true;
 	}
 	
-	private void posicionaNovaPeca(char coluna, int linha, aula_164_PecaXadrez peca)
+	private void posicionaNovaPeca(char coluna, int linha, aula_167_PecaXadrez peca)
 	{
 		tabuleiro.posicionarPeca(peca, new aula_154_PosicionamentoXadrez(coluna, linha).convertePosicao() );
 		pecasTabuleiro.add(peca);
