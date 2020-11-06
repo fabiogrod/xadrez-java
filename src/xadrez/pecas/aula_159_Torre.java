@@ -3,9 +3,9 @@ package xadrez.pecas;
 import tabuleiro.aula_159_Posicao;
 import tabuleiro.aula_156_Tabuleiro;
 import xadrez.aula_151_Cor;
-import xadrez.aula_159_PecaXadrez;
+import xadrez.aula_164_PecaXadrez;
 
-public class aula_159_Torre extends aula_159_PecaXadrez
+public class aula_159_Torre extends aula_164_PecaXadrez
 {
 	public aula_159_Torre ( aula_156_Tabuleiro tabuleiro, aula_151_Cor cor)
 	{

@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 import xadrez.aula_154_PosicionamentoXadrez;
 import xadrez.aula_156_ExcecaoXadrez;
-import xadrez.aula_159_PecaXadrez;
-import xadrez.aula_163_PartidaXadrez;
+import xadrez.aula_164_PecaXadrez;
+import xadrez.aula_165_PartidaXadrez;
 
 public class aula_163
 {
@@ -24,29 +24,29 @@ public class aula_163
 		Locale.setDefault(new Locale("pt","BR") );
 		
 		Scanner sc = new Scanner(System.in);
-		aula_163_PartidaXadrez partidaXadrez =  new aula_163_PartidaXadrez();
-		List<aula_159_PecaXadrez> capturas = new ArrayList<>();		
+		aula_165_PartidaXadrez partidaXadrez =  new aula_165_PartidaXadrez();
+		List<aula_164_PecaXadrez> capturas = new ArrayList<>();		
 		
 		while (true)
 		{
 			try
 			{				
-				aula_163_IU.limpaTela();
-				aula_163_IU.imprimirPartida(partidaXadrez, capturas);
+				aula_165_IU.limpaTela();
+				aula_165_IU.imprimirPartida(partidaXadrez, capturas);
 				
 				System.out.println();
 				System.out.print("Origem: ");
-				aula_154_PosicionamentoXadrez origem = aula_163_IU.verificarPosicionamentoXadrez(sc);
+				aula_154_PosicionamentoXadrez origem = aula_165_IU.verificarPosicionamentoXadrez(sc);
 				
 				boolean [][] movimentosPossiveis = partidaXadrez.movimentosPossiveis(origem);
-				aula_163_IU.limpaTela();
-				aula_163_IU.imprimirTabuleiro(partidaXadrez.getPecas(), movimentosPossiveis);
+				aula_165_IU.limpaTela();
+				aula_165_IU.imprimirTabuleiro(partidaXadrez.getPecas(), movimentosPossiveis);
 				
 				System.out.println();			
 				System.out.print("Destino: ");
-				aula_154_PosicionamentoXadrez destino = aula_163_IU.verificarPosicionamentoXadrez(sc);
+				aula_154_PosicionamentoXadrez destino = aula_165_IU.verificarPosicionamentoXadrez(sc);
 				
-				aula_159_PecaXadrez pecaCapturada = partidaXadrez.realizaMovimentoPeca(origem, destino);
+				aula_164_PecaXadrez pecaCapturada = partidaXadrez.realizarMovimentoXadrez(origem, destino);
 				if (pecaCapturada != null)
 				{
 					capturas.add(pecaCapturada);

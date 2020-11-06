@@ -7,11 +7,11 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import xadrez.aula_151_Cor;
-import xadrez.aula_159_PecaXadrez;
-import xadrez.aula_163_PartidaXadrez;
+import xadrez.aula_164_PecaXadrez;
+import xadrez.aula_165_PartidaXadrez;
 import xadrez.aula_154_PosicionamentoXadrez;
 
-public class aula_163_IU
+public class aula_165_IU
 {	
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 
@@ -57,15 +57,20 @@ public class aula_163_IU
 		}
 	}
 	
-	public static void imprimirPartida(aula_163_PartidaXadrez partidaXadrez, List<aula_159_PecaXadrez> capturas)
+	public static void imprimirPartida(aula_165_PartidaXadrez partidaXadrez, List<aula_164_PecaXadrez> capturas)
 	{
 		imprimirTabuleiro(partidaXadrez.getPecas());
 		imprimirPeçasCapturadas(capturas);
 		System.out.println("\nTurno: " + partidaXadrez.getTurno());
 		System.out.println("Aguardando jogador: " + partidaXadrez.getJogadorAtual());
+		
+		if(partidaXadrez.getXeque() )
+		{
+			System.out.println("XEQUE!");
+		}
 	}
 	
-	public static void imprimirTabuleiro(aula_159_PecaXadrez[][] pecas)
+	public static void imprimirTabuleiro(aula_164_PecaXadrez[][] pecas)
 	{
 		System.out.println();
 		for (int i =0; i< pecas.length; i++)
@@ -80,7 +85,7 @@ public class aula_163_IU
 		System.out.println("  A B C D E F G H");
 	}	
 	
-	public static void imprimirTabuleiro(aula_159_PecaXadrez[][] pecas, boolean[][] movimentosPossiveis)
+	public static void imprimirTabuleiro(aula_164_PecaXadrez[][] pecas, boolean[][] movimentosPossiveis)
 	{
 		System.out.println();
 		for (int i =0; i< pecas.length; i++)
@@ -95,7 +100,7 @@ public class aula_163_IU
 		System.out.println("  A B C D E F G H");
 	}	
 	
-	private static void imprimirPeca(aula_159_PecaXadrez peca, boolean fundo)
+	private static void imprimirPeca(aula_164_PecaXadrez peca, boolean fundo)
 	{
 		if (fundo)
 		{
@@ -118,10 +123,10 @@ public class aula_163_IU
 		System.out.print(" ");
 	}
 	
-	private static void imprimirPeçasCapturadas(List<aula_159_PecaXadrez> capturas)
+	private static void imprimirPeçasCapturadas(List<aula_164_PecaXadrez> capturas)
 	{
-		List<aula_159_PecaXadrez> brancas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.BRANCA).collect(Collectors.toList());
-		List<aula_159_PecaXadrez> pretas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.PRETA).collect(Collectors.toList());
+		List<aula_164_PecaXadrez> brancas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.BRANCA).collect(Collectors.toList());
+		List<aula_164_PecaXadrez> pretas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.PRETA).collect(Collectors.toList());
 		
 		System.out.println("\nPeças capturadas");
 		System.out.print("Brancas: ");

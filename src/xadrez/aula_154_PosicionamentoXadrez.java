@@ -31,9 +31,9 @@ public class aula_154_PosicionamentoXadrez
 		return new aula_159_Posicao(8 - linha, coluna - 'a');
 	}
 	
-	protected aula_154_PosicionamentoXadrez converteMatriz(aula_159_Posicao posicao)
+	protected static aula_154_PosicionamentoXadrez converteMatriz(aula_159_Posicao posicao)
 	{
-		return new aula_154_PosicionamentoXadrez( (char)('a' - posicao.getColuna()) , 8 -  posicao.getLinha() );
+		return new aula_154_PosicionamentoXadrez( (char)('a' + posicao.getColuna()) , 8 -  posicao.getLinha() );
 	}
 	
 	@Override
