@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import xadrez.aula_151_Cor;
 import xadrez.aula_167_PecaXadrez;
-import xadrez.aula_171_PartidaXadrez;
+import xadrez.aula_173_PartidaXadrez;
 import xadrez.aula_154_PosicionamentoXadrez;
 
 public class aula_166_IU
@@ -57,7 +57,7 @@ public class aula_166_IU
 		}
 	}
 	
-	public static void imprimirPartida(aula_171_PartidaXadrez partidaXadrez, List<aula_167_PecaXadrez> capturas)
+	public static void imprimirPartida(aula_173_PartidaXadrez partidaXadrez, List<aula_167_PecaXadrez> capturas)
 	{
 		imprimirTabuleiro(partidaXadrez.getPecas());
 		imprimirPeçasCapturadas(capturas);

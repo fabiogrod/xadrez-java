@@ -5,12 +5,16 @@ import tabuleiro.aula_157_Peca;
 import tabuleiro.aula_159_Posicao;
 import xadrez.aula_151_Cor;
 import xadrez.aula_167_PecaXadrez;
+import xadrez.aula_173_PartidaXadrez;
 
-public class aula_161_Rei extends aula_167_PecaXadrez
+public class aula_172_Rei extends aula_167_PecaXadrez
 {
-	public aula_161_Rei ( aula_156_Tabuleiro tabuleiro, aula_151_Cor cor)
+	private aula_173_PartidaXadrez partidaXadrez;
+	
+	public aula_172_Rei ( aula_156_Tabuleiro tabuleiro, aula_151_Cor cor, aula_173_PartidaXadrez partidaXadrez)
 	{
 		super(tabuleiro, cor);
+		this.partidaXadrez = partidaXadrez;
 	}
 	
 	@Override
@@ -24,6 +28,12 @@ public class aula_161_Rei extends aula_167_PecaXadrez
 		aula_167_PecaXadrez p = (aula_167_PecaXadrez)getTabuleiro().peca(posicao);
 		
 		return p == null || p.getCor() != getCor();
+	}
+	
+	private boolean testeRoque(aula_159_Posicao posicao)
+	{
+		aula_167_PecaXadrez peca = (aula_167_PecaXadrez)getTabuleiro().peca(posicao);
+		return peca != null && peca instanceof aula_159_Torre &&  peca.getCor() == getCor() && peca.getContagemMovimentos() == 0;
 	}
 	
 	@Override
@@ -95,6 +105,39 @@ public class aula_161_Rei extends aula_167_PecaXadrez
 		if (getTabuleiro().posicaoExistente(p) && permiteMovimento(p) )
 		{
 			matriz[p.getLinha()][p.getColuna()] = true;
+		}
+		
+		//jogada especial roque
+		if(getContagemMovimentos() == 0 && !partidaXadrez.getXeque())
+		{
+			//roque do rei
+			aula_159_Posicao posT1 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() + 3);
+			
+			if (testeRoque(posT1))
+			{
+				 aula_159_Posicao p1 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() + 1);
+				aula_159_Posicao p2 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() + 2);
+				
+				if( getTabuleiro().peca(p1) == null && getTabuleiro().peca(p2) == null)
+				{
+					matriz[posicao.getLinha()][posicao.getColuna() + 2] = true;
+				}
+			}
+			
+			//roque da rainha
+			aula_159_Posicao posT2 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() - 4);
+			
+			if (testeRoque(posT2))
+			{
+				aula_159_Posicao p1 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() - 1);
+				aula_159_Posicao p2 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() - 2);
+				aula_159_Posicao p3 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() - 3);
+				
+				if( getTabuleiro().peca(p1) == null && getTabuleiro().peca(p2) == null && getTabuleiro().peca(p3) == null)
+				{
+					matriz[posicao.getLinha()][posicao.getColuna() - 2] = true;
+				}
+			}
 		}
 		
 		return matriz;
