@@ -10,22 +10,38 @@ import tabuleiro.aula_159_Posicao;
 import xadrez.pecas.aula_159_Torre;
 import xadrez.pecas.aula_161_Rei;
 
-public class aula_165_PartidaXadrez
+public class aula_166_PartidaXadrez
 {
 	private int turno;
 	private aula_151_Cor jogadorAtual;
 	private aula_156_Tabuleiro tabuleiro;
 	private boolean xeque;
+	private boolean xequemate;
 	
 	private List<aula_157_Peca> pecasTabuleiro  = new ArrayList<>();
 	private List<aula_157_Peca> pecasCapturadas  = new ArrayList<>();
 	
-	public aula_165_PartidaXadrez()
+	public aula_166_PartidaXadrez()
 	{
 		tabuleiro = new aula_156_Tabuleiro( 8, 8);
 		turno = 1;
 		jogadorAtual = aula_151_Cor.BRANCA;
+		xeque = false;
 		configInicial();
+	}
+	
+	public aula_164_PecaXadrez[][] getPecas()
+	{
+		aula_164_PecaXadrez[][] matriz = new aula_164_PecaXadrez[tabuleiro.getLinhas() ][tabuleiro.getColunas() ];
+		
+		for (int i =0; i< tabuleiro.getLinhas(); i++)
+		{
+			for (int j =0; j< tabuleiro.getColunas(); j++)
+			{
+				matriz[i][j] = (aula_164_PecaXadrez)tabuleiro.peca(i,j);
+			}
+		}
+		return matriz;
 	}
 	
 	public int getTurno()
@@ -43,20 +59,11 @@ public class aula_165_PartidaXadrez
 		return xeque;
 	}
 	
-	public aula_164_PecaXadrez[][] getPecas()
+	public boolean getXequemate()
 	{
-		aula_164_PecaXadrez[][] matriz = new aula_164_PecaXadrez[tabuleiro.getLinhas() ][tabuleiro.getColunas() ];
-		
-		for (int i =0; i< tabuleiro.getLinhas(); i++)
-		{
-			for (int j =0; j< tabuleiro.getColunas(); j++)
-			{
-				matriz[i][j] = (aula_164_PecaXadrez)tabuleiro.peca(i,j);
-			}
-		}
-		return matriz;
+		return xequemate;
 	}
-		
+	
 	public boolean[][] movimentosPossiveis(aula_154_PosicionamentoXadrez posicaoOrigem)
 	{
 		aula_159_Posicao posicao = posicaoOrigem.convertePosicao();
@@ -80,7 +87,15 @@ public class aula_165_PartidaXadrez
 		
 		xeque = (testeXeque(oponente(jogadorAtual) ) ) ? true : false;
 		
-		proximoTurno();
+		if (testeXequemate(oponente(jogadorAtual)))
+		{
+			xequemate = true;
+		}
+		else
+		{
+			proximoTurno();
+		}		
+		
 		return (aula_164_PecaXadrez) pecaCapturada;		
 	}
 	
@@ -137,12 +152,6 @@ public class aula_165_PartidaXadrez
 		}
 	}
 	
-	private void proximoTurno()
-	{
-		turno++;
-		jogadorAtual = (jogadorAtual == aula_151_Cor.BRANCA) ? aula_151_Cor.PRETA : aula_151_Cor.BRANCA;
-	}
-	
 	private aula_151_Cor oponente(aula_151_Cor cor)
 	{
 		return (cor == aula_151_Cor.BRANCA) ? aula_151_Cor.PRETA : aula_151_Cor.BRANCA;
@@ -178,13 +187,50 @@ public class aula_165_PartidaXadrez
 		return false;
 	}
 	
+	private boolean testeXequemate(aula_151_Cor cor)
+	{
+		if(!testeXeque(cor))
+		{
+			return false;
+		}
+		List<aula_157_Peca> lista = pecasTabuleiro.stream().filter(x -> ((aula_164_PecaXadrez)x).getCor() == cor) .collect(Collectors.toList());
+		
+		for(aula_157_Peca p : lista)
+		{
+			boolean[][] matriz = p.movimentosPossiveis();
+			for(int i = 0; i < tabuleiro.getLinhas(); i++)
+			{
+				for(int j = 0; j < tabuleiro.getColunas(); j++)
+				{
+					if(matriz[i][j])
+					{
+						aula_159_Posicao origem = ((aula_164_PecaXadrez)p).getPosicionamentoXadrez().convertePosicao();
+						aula_159_Posicao destino = new aula_159_Posicao( i, j);
+						aula_157_Peca pecaCapturada = realizarMovimento(origem, destino);
+						boolean testeXeque = testeXeque(cor);
+						desfazerMovimento(origem, destino, pecaCapturada);
+						if (!testeXeque)
+						{
+							return false;
+						}
+					}
+				}
+			}				
+		}
+		return true;
+	}
+	
 	private void posicionaNovaPeca(char coluna, int linha, aula_164_PecaXadrez peca)
 	{
 		tabuleiro.posicionarPeca(peca, new aula_154_PosicionamentoXadrez(coluna, linha).convertePosicao() );
 		pecasTabuleiro.add(peca);
 	}
 	
-	
+	private void proximoTurno()
+	{
+		turno++;
+		jogadorAtual = (jogadorAtual == aula_151_Cor.BRANCA) ? aula_151_Cor.PRETA : aula_151_Cor.BRANCA;
+	}
 	
 	private void configInicial()
 	{				

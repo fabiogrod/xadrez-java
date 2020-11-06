@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 import xadrez.aula_151_Cor;
 import xadrez.aula_164_PecaXadrez;
-import xadrez.aula_165_PartidaXadrez;
+import xadrez.aula_166_PartidaXadrez;
 import xadrez.aula_154_PosicionamentoXadrez;
 
-public class aula_165_IU
+public class aula_166_IU
 {	
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 
@@ -57,16 +57,25 @@ public class aula_165_IU
 		}
 	}
 	
-	public static void imprimirPartida(aula_165_PartidaXadrez partidaXadrez, List<aula_164_PecaXadrez> capturas)
+	public static void imprimirPartida(aula_166_PartidaXadrez partidaXadrez, List<aula_164_PecaXadrez> capturas)
 	{
 		imprimirTabuleiro(partidaXadrez.getPecas());
 		imprimirPeçasCapturadas(capturas);
 		System.out.println("\nTurno: " + partidaXadrez.getTurno());
-		System.out.println("Aguardando jogador: " + partidaXadrez.getJogadorAtual());
 		
-		if(partidaXadrez.getXequemate() )
+		if(!partidaXadrez.getXequemate())
 		{
-			System.out.println("XEQUE-MATE!");
+			System.out.println("Aguardando jogador: " + partidaXadrez.getJogadorAtual());
+			
+			if(partidaXadrez.getXeque() )
+			{
+				System.out.println("XEQUE!");
+			}			
+		}
+		else
+		{
+			System.out.println("\nXEQUE-MATE!!");
+			System.out.println("Vencedor: " + partidaXadrez.getJogadorAtual());
 		}
 	}
 	
