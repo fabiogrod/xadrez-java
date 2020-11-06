@@ -9,9 +9,10 @@ import tabuleiro.aula_157_Peca;
 import tabuleiro.aula_159_Posicao;
 import xadrez.pecas.aula_159_Torre;
 import xadrez.pecas.aula_161_Rei;
-import xadrez.aula_167_PartidaXadrez;
+import xadrez.pecas.aula_168_Peao;
+import xadrez.aula_168_PartidaXadrez;
 
-public class aula_167_PartidaXadrez
+public class aula_168_PartidaXadrez
 {
 	private int turno;
 	private aula_151_Cor jogadorAtual;
@@ -22,7 +23,7 @@ public class aula_167_PartidaXadrez
 	private List<aula_157_Peca> pecasTabuleiro  = new ArrayList<>();
 	private List<aula_157_Peca> pecasCapturadas  = new ArrayList<>();
 	
-	public aula_167_PartidaXadrez()
+	public aula_168_PartidaXadrez()
 	{
 		tabuleiro = new aula_156_Tabuleiro( 8, 8);
 		turno = 1;
@@ -236,16 +237,30 @@ public class aula_167_PartidaXadrez
 	}
 	
 	private void configInicial()
-	{				
-//		posicionaNovaPeca('B', 6, new aula_152_Torre(tabuleiro, aula_151_Cor.BRANCA) );
-//		posicionaNovaPeca('E', 8, new aula_152_Rei(tabuleiro, aula_151_Cor.PRETA) );
-//		posicionaNovaPeca('E', 1, new aula_152_Rei(tabuleiro, aula_151_Cor.BRANCA) );
-//		
-		posicionaNovaPeca('h', 7, new aula_159_Torre(tabuleiro, aula_151_Cor.BRANCA));
-        posicionaNovaPeca('d', 1, new aula_159_Torre(tabuleiro, aula_151_Cor.BRANCA));        
-        posicionaNovaPeca('e', 1, new aula_161_Rei(tabuleiro, aula_151_Cor.BRANCA));
+	{					
+		posicionaNovaPeca('a', 1, new aula_159_Torre(tabuleiro, aula_151_Cor.BRANCA));
+		posicionaNovaPeca('e', 1, new aula_161_Rei(tabuleiro, aula_151_Cor.BRANCA));
+        posicionaNovaPeca('h', 1, new aula_159_Torre(tabuleiro, aula_151_Cor.BRANCA));
+        posicionaNovaPeca('a', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
+        posicionaNovaPeca('b', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
+        posicionaNovaPeca('c', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
+        posicionaNovaPeca('d', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
+        posicionaNovaPeca('e', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
+        posicionaNovaPeca('f', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
+        posicionaNovaPeca('g', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
+        posicionaNovaPeca('h', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
+        
 
-        posicionaNovaPeca('b', 8, new aula_159_Torre(tabuleiro, aula_151_Cor.PRETA));      
-        posicionaNovaPeca('a', 8, new aula_161_Rei(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('a', 8, new aula_159_Torre(tabuleiro, aula_151_Cor.PRETA));        
+        posicionaNovaPeca('e', 8, new aula_161_Rei(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('h', 8, new aula_159_Torre(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('a', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('b', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('c', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('d', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('e', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('f', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('g', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('h', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));        
 	}
 }
