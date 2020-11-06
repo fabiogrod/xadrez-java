@@ -12,9 +12,10 @@ import xadrez.pecas.aula_161_Rei;
 import xadrez.pecas.aula_168_Peao;
 import xadrez.pecas.aula_169_Bispo;
 import xadrez.pecas.aula_170_Cavalo;
-import xadrez.aula_170_PartidaXadrez;
+import xadrez.pecas.aula_171_Rainha;
+import xadrez.aula_171_PartidaXadrez;
 
-public class aula_170_PartidaXadrez
+public class aula_171_PartidaXadrez
 {
 	private int turno;
 	private aula_151_Cor jogadorAtual;
@@ -25,7 +26,7 @@ public class aula_170_PartidaXadrez
 	private List<aula_157_Peca> pecasTabuleiro  = new ArrayList<>();
 	private List<aula_157_Peca> pecasCapturadas  = new ArrayList<>();
 	
-	public aula_170_PartidaXadrez()
+	public aula_171_PartidaXadrez()
 	{
 		tabuleiro = new aula_156_Tabuleiro( 8, 8);
 		turno = 1;
@@ -243,6 +244,7 @@ public class aula_170_PartidaXadrez
 		posicionaNovaPeca('a', 1, new aula_159_Torre(tabuleiro, aula_151_Cor.BRANCA));
 		posicionaNovaPeca('b', 1, new aula_170_Cavalo(tabuleiro, aula_151_Cor.BRANCA));
 		posicionaNovaPeca('c', 1, new aula_169_Bispo(tabuleiro, aula_151_Cor.BRANCA));
+		posicionaNovaPeca('d', 1, new aula_171_Rainha(tabuleiro, aula_151_Cor.BRANCA));
 		posicionaNovaPeca('e', 1, new aula_161_Rei(tabuleiro, aula_151_Cor.BRANCA));
 		posicionaNovaPeca('f', 1, new aula_169_Bispo(tabuleiro, aula_151_Cor.BRANCA));
 		posicionaNovaPeca('g', 1, new aula_170_Cavalo(tabuleiro, aula_151_Cor.BRANCA));
@@ -254,12 +256,12 @@ public class aula_170_PartidaXadrez
         posicionaNovaPeca('e', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
         posicionaNovaPeca('f', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
         posicionaNovaPeca('g', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
-        posicionaNovaPeca('h', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
-        
+        posicionaNovaPeca('h', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));        
 
         posicionaNovaPeca('a', 8, new aula_159_Torre(tabuleiro, aula_151_Cor.PRETA));
         posicionaNovaPeca('b', 8, new aula_170_Cavalo(tabuleiro, aula_151_Cor.PRETA));
-        posicionaNovaPeca('c', 8, new aula_169_Bispo(tabuleiro, aula_151_Cor.PRETA));        
+        posicionaNovaPeca('c', 8, new aula_169_Bispo(tabuleiro, aula_151_Cor.PRETA));
+        posicionaNovaPeca('d', 8, new aula_171_Rainha(tabuleiro, aula_151_Cor.PRETA));
         posicionaNovaPeca('e', 8, new aula_161_Rei(tabuleiro, aula_151_Cor.PRETA));
         posicionaNovaPeca('f', 8, new aula_169_Bispo(tabuleiro, aula_151_Cor.PRETA));
         posicionaNovaPeca('g', 8, new aula_170_Cavalo(tabuleiro, aula_151_Cor.PRETA));

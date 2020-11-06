@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import xadrez.aula_154_PosicionamentoXadrez;
 import xadrez.aula_156_ExcecaoXadrez;
-import xadrez.aula_170_PartidaXadrez;
+import xadrez.aula_171_PartidaXadrez;
 import xadrez.aula_167_PecaXadrez;
 
 public class aula_166
@@ -24,7 +24,7 @@ public class aula_166
 		Locale.setDefault(new Locale("pt","BR") );
 		
 		Scanner sc = new Scanner(System.in);
-		aula_170_PartidaXadrez partidaXadrez =  new aula_170_PartidaXadrez();
+		aula_171_PartidaXadrez partidaXadrez =  new aula_171_PartidaXadrez();
 		List<aula_167_PecaXadrez> capturas = new ArrayList<>();		
 		
 		while (!partidaXadrez.getXequemate())

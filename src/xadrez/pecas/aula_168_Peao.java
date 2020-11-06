@@ -55,7 +55,7 @@ public class aula_168_Peao extends aula_167_PecaXadrez
 			}
 			
 			peca.setValores(posicao.getLinha() + 2, posicao.getColuna());
-			aula_159_Posicao peca2 = new aula_159_Posicao(posicao.getLinha() - 1, posicao.getColuna());
+			aula_159_Posicao peca2 = new aula_159_Posicao(posicao.getLinha() + 1, posicao.getColuna());
 			if (getTabuleiro().posicaoExistente(peca) && !getTabuleiro().pecaExistente(peca) && getTabuleiro().posicaoExistente(peca2) && !getTabuleiro().pecaExistente(peca2) && getContagemMovimentos() == 0)
 			{
 				matriz[peca.getLinha()][peca.getColuna()] = true;
