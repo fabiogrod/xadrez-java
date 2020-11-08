@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import xadrez.aula_154_PosicionamentoXadrez;
-import xadrez.aula_156_ExcecaoXadrez;
-import xadrez.aula_178_PartidaXadrez;
-import xadrez.aula_167_PecaXadrez;
+import xadrez.PosicionamentoXadrez;
+import xadrez.ExcecaoXadrez;
+import xadrez.PartidaXadrez;
+import xadrez.PecaXadrez;
 
-public class aula_178
+public class Programa
 {
 	public static void main(String[] args)
 	{
@@ -24,29 +24,29 @@ public class aula_178
 		Locale.setDefault(new Locale("pt","BR") );
 		
 		Scanner sc = new Scanner(System.in);
-		aula_178_PartidaXadrez partidaXadrez =  new aula_178_PartidaXadrez();
-		List<aula_167_PecaXadrez> capturas = new ArrayList<>();		
+		PartidaXadrez partidaXadrez =  new PartidaXadrez();
+		List<PecaXadrez> capturas = new ArrayList<>();		
 		
 		while (!partidaXadrez.getXequemate())
 		{
 			try
 			{				
-				aula_166_IU.limpaTela();
-				aula_166_IU.imprimirPartida(partidaXadrez, capturas);
+				InterfaceUsuario.limpaTela();
+				InterfaceUsuario.imprimirPartida(partidaXadrez, capturas);
 				
 				System.out.println();
 				System.out.print("Origem: ");
-				aula_154_PosicionamentoXadrez origem = aula_166_IU.verificarPosicionamentoXadrez(sc);
+				PosicionamentoXadrez origem = InterfaceUsuario.verificarPosicionamentoXadrez(sc);
 				
 				boolean [][] movimentosPossiveis = partidaXadrez.movimentosPossiveis(origem);
-				aula_166_IU.limpaTela();
-				aula_166_IU.imprimirTabuleiro(partidaXadrez.getPecas(), movimentosPossiveis);
+				InterfaceUsuario.limpaTela();
+				InterfaceUsuario.imprimirTabuleiro(partidaXadrez.getPecas(), movimentosPossiveis);
 				
 				System.out.println();			
 				System.out.print("Destino: ");
-				aula_154_PosicionamentoXadrez destino = aula_166_IU.verificarPosicionamentoXadrez(sc);
+				PosicionamentoXadrez destino = InterfaceUsuario.verificarPosicionamentoXadrez(sc);
 				
-				aula_167_PecaXadrez pecaCapturada = partidaXadrez.realizarMovimentoXadrez(origem, destino);
+				PecaXadrez pecaCapturada = partidaXadrez.realizarMovimentoXadrez(origem, destino);
 				if (pecaCapturada != null)
 				{
 					capturas.add(pecaCapturada);
@@ -66,7 +66,7 @@ public class aula_178
 					partidaXadrez.trocarPecaPromovida(tipo.toLowerCase());
 				}
 			}
-			catch(aula_156_ExcecaoXadrez e)
+			catch(ExcecaoXadrez e)
 			{
 				System.out.println(e.getMessage());				
 				sc.nextLine();
@@ -77,7 +77,7 @@ public class aula_178
 				sc.nextLine();
 			}
 		}
-		aula_166_IU.limpaTela();
-		aula_166_IU.imprimirPartida(partidaXadrez, capturas);
+		InterfaceUsuario.limpaTela();
+		InterfaceUsuario.imprimirPartida(partidaXadrez, capturas);
 	}
 }

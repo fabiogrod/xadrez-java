@@ -1,17 +1,17 @@
 package xadrez.pecas;
 
-import tabuleiro.aula_156_Tabuleiro;
-import tabuleiro.aula_157_Peca;
-import tabuleiro.aula_159_Posicao;
-import xadrez.aula_151_Cor;
-import xadrez.aula_167_PecaXadrez;
-import xadrez.aula_178_PartidaXadrez;
+import tabuleiro.Tabuleiro;
+import tabuleiro.Peca;
+import tabuleiro.Posicao;
+import xadrez.Cor;
+import xadrez.PecaXadrez;
+import xadrez.PartidaXadrez;
 
-public class aula_172_Rei extends aula_167_PecaXadrez
+public class Rei extends PecaXadrez
 {
-	private aula_178_PartidaXadrez partidaXadrez;
+	private PartidaXadrez partidaXadrez;
 	
-	public aula_172_Rei ( aula_156_Tabuleiro tabuleiro, aula_151_Cor cor, aula_178_PartidaXadrez partidaXadrez)
+	public Rei ( Tabuleiro tabuleiro, Cor cor, PartidaXadrez partidaXadrez)
 	{
 		super(tabuleiro, cor);
 		this.partidaXadrez = partidaXadrez;
@@ -23,17 +23,17 @@ public class aula_172_Rei extends aula_167_PecaXadrez
 		return "K";
 	}
 	
-	private boolean permiteMovimento(aula_159_Posicao posicao)
+	private boolean permiteMovimento(Posicao posicao)
 	{
-		aula_167_PecaXadrez p = (aula_167_PecaXadrez)getTabuleiro().peca(posicao);
+		PecaXadrez p = (PecaXadrez)getTabuleiro().peca(posicao);
 		
 		return p == null || p.getCor() != getCor();
 	}
 	
-	private boolean testeRoque(aula_159_Posicao posicao)
+	private boolean testeRoque(Posicao posicao)
 	{
-		aula_167_PecaXadrez peca = (aula_167_PecaXadrez)getTabuleiro().peca(posicao);
-		return peca != null && peca instanceof aula_159_Torre &&  peca.getCor() == getCor() && peca.getContagemMovimentos() == 0;
+		PecaXadrez peca = (PecaXadrez)getTabuleiro().peca(posicao);
+		return peca != null && peca instanceof Torre &&  peca.getCor() == getCor() && peca.getContagemMovimentos() == 0;
 	}
 	
 	@Override
@@ -41,7 +41,7 @@ public class aula_172_Rei extends aula_167_PecaXadrez
 	{	
 		boolean[][] matriz = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
 		
-		aula_159_Posicao p = new aula_159_Posicao( 0, 0);
+		Posicao p = new Posicao( 0, 0);
 		
 		//acima
 		p.setValores(posicao.getLinha() - 1, posicao.getColuna());
@@ -111,12 +111,12 @@ public class aula_172_Rei extends aula_167_PecaXadrez
 		if(getContagemMovimentos() == 0 && !partidaXadrez.getXeque())
 		{
 			//roque do rei
-			aula_159_Posicao posT1 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() + 3);
+			Posicao posT1 = new Posicao(posicao.getLinha(), posicao.getColuna() + 3);
 			
 			if (testeRoque(posT1))
 			{
-				 aula_159_Posicao p1 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() + 1);
-				aula_159_Posicao p2 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() + 2);
+				 Posicao p1 = new Posicao(posicao.getLinha(), posicao.getColuna() + 1);
+				Posicao p2 = new Posicao(posicao.getLinha(), posicao.getColuna() + 2);
 				
 				if( getTabuleiro().peca(p1) == null && getTabuleiro().peca(p2) == null)
 				{
@@ -125,13 +125,13 @@ public class aula_172_Rei extends aula_167_PecaXadrez
 			}
 			
 			//roque da rainha
-			aula_159_Posicao posT2 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() - 4);
+			Posicao posT2 = new Posicao(posicao.getLinha(), posicao.getColuna() - 4);
 			
 			if (testeRoque(posT2))
 			{
-				aula_159_Posicao p1 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() - 1);
-				aula_159_Posicao p2 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() - 2);
-				aula_159_Posicao p3 = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() - 3);
+				Posicao p1 = new Posicao(posicao.getLinha(), posicao.getColuna() - 1);
+				Posicao p2 = new Posicao(posicao.getLinha(), posicao.getColuna() - 2);
+				Posicao p3 = new Posicao(posicao.getLinha(), posicao.getColuna() - 3);
 				
 				if( getTabuleiro().peca(p1) == null && getTabuleiro().peca(p2) == null && getTabuleiro().peca(p3) == null)
 				{

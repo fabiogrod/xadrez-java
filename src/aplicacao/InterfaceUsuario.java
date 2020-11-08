@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import xadrez.aula_151_Cor;
-import xadrez.aula_167_PecaXadrez;
-import xadrez.aula_178_PartidaXadrez;
-import xadrez.aula_154_PosicionamentoXadrez;
+import xadrez.Cor;
+import xadrez.PecaXadrez;
+import xadrez.PartidaXadrez;
+import xadrez.PosicionamentoXadrez;
 
-public class aula_166_IU
+public class InterfaceUsuario
 {	
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 
@@ -41,7 +41,7 @@ public class aula_166_IU
 		System.out.flush();
 	}
 	
-	public static aula_154_PosicionamentoXadrez verificarPosicionamentoXadrez(Scanner sc)
+	public static PosicionamentoXadrez verificarPosicionamentoXadrez(Scanner sc)
 	{
 		try
 		{
@@ -49,7 +49,7 @@ public class aula_166_IU
 			char coluna = s.charAt(0);
 			
 			int linha = Integer.parseInt(s.substring(1));
-			return new aula_154_PosicionamentoXadrez(coluna, linha);
+			return new PosicionamentoXadrez(coluna, linha);
 		}
 		catch(RuntimeException e)
 		{
@@ -57,7 +57,7 @@ public class aula_166_IU
 		}
 	}
 	
-	public static void imprimirPartida(aula_178_PartidaXadrez partidaXadrez, List<aula_167_PecaXadrez> capturas)
+	public static void imprimirPartida(PartidaXadrez partidaXadrez, List<PecaXadrez> capturas)
 	{
 		imprimirTabuleiro(partidaXadrez.getPecas());
 		imprimirPeçasCapturadas(capturas);
@@ -79,7 +79,7 @@ public class aula_166_IU
 		}
 	}
 	
-	public static void imprimirTabuleiro(aula_167_PecaXadrez[][] pecas)
+	public static void imprimirTabuleiro(PecaXadrez[][] pecas)
 	{
 		System.out.println();
 		for (int i =0; i< pecas.length; i++)
@@ -94,7 +94,7 @@ public class aula_166_IU
 		System.out.println("  A B C D E F G H");
 	}	
 	
-	public static void imprimirTabuleiro(aula_167_PecaXadrez[][] pecas, boolean[][] movimentosPossiveis)
+	public static void imprimirTabuleiro(PecaXadrez[][] pecas, boolean[][] movimentosPossiveis)
 	{
 		System.out.println();
 		for (int i =0; i< pecas.length; i++)
@@ -109,7 +109,7 @@ public class aula_166_IU
 		System.out.println("  A B C D E F G H");
 	}	
 	
-	private static void imprimirPeca(aula_167_PecaXadrez peca, boolean fundo)
+	private static void imprimirPeca(PecaXadrez peca, boolean fundo)
 	{
 		if (fundo)
 		{
@@ -122,7 +122,7 @@ public class aula_166_IU
 		}
 		else
 		{
-			if (peca.getCor() == aula_151_Cor.BRANCA) {
+			if (peca.getCor() == Cor.BRANCA) {
                 System.out.print(ANSI_WHITE + peca + ANSI_RESET);
             }
             else {
@@ -132,10 +132,10 @@ public class aula_166_IU
 		System.out.print(" ");
 	}
 	
-	private static void imprimirPeçasCapturadas(List<aula_167_PecaXadrez> capturas)
+	private static void imprimirPeçasCapturadas(List<PecaXadrez> capturas)
 	{
-		List<aula_167_PecaXadrez> brancas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.BRANCA).collect(Collectors.toList());
-		List<aula_167_PecaXadrez> pretas = capturas.stream().filter(x -> x.getCor() == aula_151_Cor.PRETA).collect(Collectors.toList());
+		List<PecaXadrez> brancas = capturas.stream().filter(x -> x.getCor() == Cor.BRANCA).collect(Collectors.toList());
+		List<PecaXadrez> pretas = capturas.stream().filter(x -> x.getCor() == Cor.PRETA).collect(Collectors.toList());
 		
 		System.out.println("\nPeças capturadas");
 		System.out.print("Brancas: ");

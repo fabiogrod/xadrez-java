@@ -1,6 +1,6 @@
 package xadrez;
 
-public enum aula_151_Cor
+public enum Cor
 {
 	PRETA,
 	BRANCA;

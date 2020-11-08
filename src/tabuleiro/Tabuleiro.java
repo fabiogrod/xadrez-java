@@ -1,21 +1,21 @@
 package tabuleiro;
 
-public class aula_156_Tabuleiro
+public class Tabuleiro
 {
 	private int linhas;
 	private int colunas;
-	private aula_157_Peca[][] pecas;
+	private Peca[][] pecas;
 	
-	public aula_156_Tabuleiro(int linhas, int colunas) 
+	public Tabuleiro(int linhas, int colunas) 
 	{
 		if(linhas < 1 || colunas < 1)
 		{
-			throw new aula_153_ExcecaoTabuleiro("Erro ao criar tabuleiro: é necessário pelo menos 1 linha e 1 coluna");
+			throw new ExcecaoTabuleiro("Erro ao criar tabuleiro: é necessário pelo menos 1 linha e 1 coluna");
 		}
 		
 		this.linhas = linhas;
 		this.colunas = colunas;
-		pecas = new aula_157_Peca[linhas][colunas]; 
+		pecas = new Peca[linhas][colunas]; 
 	}
 	
 	public int getLinhas() {
@@ -26,46 +26,46 @@ public class aula_156_Tabuleiro
 		return colunas;
 	}
 	
-	public aula_157_Peca peca(int linha, int coluna)
+	public Peca peca(int linha, int coluna)
 	{
 		if (!posicaoExistente(linha, coluna))
 		{
-			throw new aula_153_ExcecaoTabuleiro("Posicão não existe no tabuleiro");
+			throw new ExcecaoTabuleiro("Posicão não existe no tabuleiro");
 		}
 		return pecas[linha][coluna];
 	}
 	
-	public aula_157_Peca peca(aula_159_Posicao posicao)
+	public Peca peca(Posicao posicao)
 	{
 		if (!posicaoExistente(posicao))
 		{
-			throw new aula_153_ExcecaoTabuleiro("Posicão não existe no tabuleiro");
+			throw new ExcecaoTabuleiro("Posicão não existe no tabuleiro");
 		}
 		return pecas[posicao.getLinha() ][posicao.getColuna() ];
 	}
 	
-	public void posicionarPeca(aula_157_Peca peca, aula_159_Posicao posicao)
+	public void posicionarPeca(Peca peca, Posicao posicao)
 	{
 		if (pecaExistente(posicao))
 		{
-			throw new aula_153_ExcecaoTabuleiro("Já existe uma peça na posição " + posicao);
+			throw new ExcecaoTabuleiro("Já existe uma peça na posição " + posicao);
 		}
 		pecas[posicao.getLinha()][posicao.getColuna()] = peca;
 		peca.posicao = posicao;
 	}
 	
-	public aula_157_Peca removerPeca(aula_159_Posicao posicao)
+	public Peca removerPeca(Posicao posicao)
 	{
 		if (!posicaoExistente(posicao))
 		{
-			throw new aula_153_ExcecaoTabuleiro("Posicão não existe no tabuleiro");
+			throw new ExcecaoTabuleiro("Posicão não existe no tabuleiro");
 		}
 		
 		if (peca(posicao) == null)
 		{
 			return null;
 		}
-		aula_157_Peca aux = peca(posicao);
+		Peca aux = peca(posicao);
 		aux.posicao = null;
 		
 		pecas[posicao.getLinha()] [posicao.getColuna()] = null;
@@ -78,16 +78,16 @@ public class aula_156_Tabuleiro
 		return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas;
 	}
 	
-	public boolean posicaoExistente(aula_159_Posicao posicao)
+	public boolean posicaoExistente(Posicao posicao)
 	{
 		return posicaoExistente(posicao.getLinha(), posicao.getColuna());
 	}
 	
-	public boolean pecaExistente(aula_159_Posicao posicao)
+	public boolean pecaExistente(Posicao posicao)
 	{
 		if (!posicaoExistente(posicao))
 		{
-			throw new aula_153_ExcecaoTabuleiro("Posicão não existe no tabuleiro");
+			throw new ExcecaoTabuleiro("Posicão não existe no tabuleiro");
 		}
 		return peca(posicao) != null;
 	}

@@ -1,25 +1,25 @@
 package tabuleiro;
 
-public abstract class aula_157_Peca
+public abstract class Peca
 {
-	protected aula_159_Posicao posicao;
-	private aula_156_Tabuleiro tabuleiro;
+	protected Posicao posicao;
+	private Tabuleiro tabuleiro;
 	
-	public aula_157_Peca() {};
+	public Peca() {};
 	
-	public aula_157_Peca(aula_156_Tabuleiro tabuleiro)
+	public Peca(Tabuleiro tabuleiro)
 	{
 		this.tabuleiro = tabuleiro;
 		posicao  = null;
 	}
 
-	protected aula_156_Tabuleiro getTabuleiro() {
+	protected Tabuleiro getTabuleiro() {
 		return tabuleiro;
 	}	
 	
 	public abstract boolean[][] movimentosPossiveis();
 	
-	public boolean movimentoPossivel(aula_159_Posicao posicao)
+	public boolean movimentoPossivel(Posicao posicao)
 	{
 		return movimentosPossiveis()[posicao.getLinha()][posicao.getColuna()];
 	}

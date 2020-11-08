@@ -1,13 +1,13 @@
 package xadrez.pecas;
 
-import tabuleiro.aula_159_Posicao;
-import tabuleiro.aula_156_Tabuleiro;
-import xadrez.aula_151_Cor;
-import xadrez.aula_167_PecaXadrez;
+import tabuleiro.Posicao;
+import tabuleiro.Tabuleiro;
+import xadrez.Cor;
+import xadrez.PecaXadrez;
 
-public class aula_159_Torre extends aula_167_PecaXadrez
+public class Torre extends PecaXadrez
 {
-	public aula_159_Torre ( aula_156_Tabuleiro tabuleiro, aula_151_Cor cor)
+	public Torre ( Tabuleiro tabuleiro, Cor cor)
 	{
 		super(tabuleiro, cor);
 	}
@@ -23,7 +23,7 @@ public class aula_159_Torre extends aula_167_PecaXadrez
 	{	
 		boolean[][] matriz = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
 		
-		aula_159_Posicao p = new aula_159_Posicao( 0, 0);
+		Posicao p = new Posicao( 0, 0);
 		
 		//acima
 		p.setValores(posicao.getLinha() - 1, posicao.getColuna() );
