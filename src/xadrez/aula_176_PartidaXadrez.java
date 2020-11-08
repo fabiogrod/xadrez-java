@@ -1,5 +1,6 @@
 package xadrez;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,25 +15,27 @@ import xadrez.pecas.aula_169_Bispo;
 import xadrez.pecas.aula_170_Cavalo;
 import xadrez.pecas.aula_171_Rainha;
 
-public class aula_175_PartidaXadrez
+public class aula_176_PartidaXadrez
 {
 	private int turno;
 	private aula_151_Cor jogadorAtual;
 	private aula_156_Tabuleiro tabuleiro;
 	private boolean xeque;
 	private boolean xequemate;
-	private aula_167_PecaXadrez enPassant; 
+	private aula_167_PecaXadrez enPassant;
+	private aula_167_PecaXadrez promocao;
 	
 	private List<aula_157_Peca> pecasTabuleiro  = new ArrayList<>();
 	private List<aula_157_Peca> pecasCapturadas  = new ArrayList<>();
 	
-	public aula_175_PartidaXadrez()
+	public aula_176_PartidaXadrez()
 	{
 		tabuleiro = new aula_156_Tabuleiro( 8, 8);
 		turno = 1;
 		jogadorAtual = aula_151_Cor.BRANCA;
 		xeque = false;
 		enPassant = null;
+		promocao = null;
 		configInicial();
 	}
 	
@@ -75,6 +78,11 @@ public class aula_175_PartidaXadrez
 		return enPassant;
 	}
 	
+	public aula_167_PecaXadrez getPromocao()
+	{
+		return promocao;
+	}
+	
 	public boolean[][] movimentosPossiveis(aula_154_PosicionamentoXadrez posicaoOrigem)
 	{
 		aula_159_Posicao posicao = posicaoOrigem.convertePosicao();
@@ -88,7 +96,7 @@ public class aula_175_PartidaXadrez
 		aula_159_Posicao destino =  posicaoDestino.convertePosicao();
 		validarPosicaoOrigem(origem);
 		validarPosicaoDestino(origem, destino);
-		aula_157_Peca pecaCapturada = realizarMovimento(origem, destino);
+		aula_157_Peca pecaCapturada = realizarMovimento(origem, destino);	
 		
 		if (testeXeque(jogadorAtual))
 		{
@@ -98,6 +106,18 @@ public class aula_175_PartidaXadrez
 		
 		aula_167_PecaXadrez pecaMovida = (aula_167_PecaXadrez)tabuleiro.peca(destino);
 		
+		// jogada especial promocao
+		
+		promocao = null;
+		
+		if (pecaMovida instanceof aula_174_Peao) 
+		{
+			if ( (pecaMovida.getCor() == aula_151_Cor.BRANCA && destino.getLinha() == 0) || (pecaMovida.getCor() == aula_151_Cor.PRETA && destino.getLinha() == 7) )
+			{
+				promocao = (aula_167_PecaXadrez) tabuleiro.peca(destino);
+				promocao = (aula_167_PecaXadrez) trocarPecaPromovida("r");				
+			}
+		}
 		
 		xeque = (testeXeque(oponente(jogadorAtual) ) ) ? true : false;
 		
@@ -121,6 +141,36 @@ public class aula_175_PartidaXadrez
 		}
 				
 		return (aula_167_PecaXadrez) pecaCapturada;		
+	}
+	
+	public aula_157_Peca trocarPecaPromovida(String tipo)
+	{
+		if (promocao == null)
+		{
+			throw new IllegalStateException("Não há peça para ser promovida");
+		}
+		if (!tipo.equals("b") && !tipo.equals("c") && !tipo.equals("r") && !tipo.equals("t"))
+		{
+			throw new InvalidParameterException("Tipo inválido para promoção");
+		}
+		
+		aula_159_Posicao posicao = promocao.getPosicionamentoXadrez().convertePosicao();
+		aula_157_Peca peca = tabuleiro.removerPeca(posicao);
+		pecasTabuleiro.remove(peca);
+		
+		aula_167_PecaXadrez novaPeca = novaPeca( tipo, promocao.getCor() );		
+		tabuleiro.posicionarPeca(novaPeca, posicao);
+		pecasTabuleiro.add(novaPeca);
+		
+		return novaPeca;
+	}
+	
+	private aula_167_PecaXadrez novaPeca(String tipo, aula_151_Cor cor)
+	{
+		if(tipo.equals("b")) return new aula_169_Bispo(tabuleiro, cor);
+		if(tipo.equals("c")) return new aula_170_Cavalo(tabuleiro, cor);		
+		if(tipo.equals("r")) return new aula_171_Rainha(tabuleiro, cor);		
+		return new aula_159_Torre(tabuleiro, cor);
 	}
 	
 	private aula_157_Peca realizarMovimento(aula_159_Posicao origem, aula_159_Posicao destino)

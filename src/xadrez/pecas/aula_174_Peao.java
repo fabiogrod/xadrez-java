@@ -4,13 +4,13 @@ import tabuleiro.aula_156_Tabuleiro;
 import tabuleiro.aula_159_Posicao;
 import xadrez.aula_151_Cor;
 import xadrez.aula_167_PecaXadrez;
-import xadrez.aula_175_PartidaXadrez;
+import xadrez.aula_176_PartidaXadrez;
 
 public class aula_174_Peao extends aula_167_PecaXadrez
 {	
-	private aula_175_PartidaXadrez partidaXadrez;
+	private aula_176_PartidaXadrez partidaXadrez;
 	
-	public aula_174_Peao(aula_156_Tabuleiro tabuleiro, aula_151_Cor cor, aula_175_PartidaXadrez partidaXadrez)
+	public aula_174_Peao(aula_156_Tabuleiro tabuleiro, aula_151_Cor cor, aula_176_PartidaXadrez partidaXadrez)
 	{
 		super(tabuleiro, cor);
 		this.partidaXadrez = partidaXadrez;

@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 import xadrez.aula_154_PosicionamentoXadrez;
 import xadrez.aula_156_ExcecaoXadrez;
-import xadrez.aula_175_PartidaXadrez;
+import xadrez.aula_176_PartidaXadrez;
 import xadrez.aula_167_PecaXadrez;
 
-public class aula_166
+public class aula_176
 {
 	public static void main(String[] args)
 	{
@@ -24,7 +24,7 @@ public class aula_166
 		Locale.setDefault(new Locale("pt","BR") );
 		
 		Scanner sc = new Scanner(System.in);
-		aula_175_PartidaXadrez partidaXadrez =  new aula_175_PartidaXadrez();
+		aula_176_PartidaXadrez partidaXadrez =  new aula_176_PartidaXadrez();
 		List<aula_167_PecaXadrez> capturas = new ArrayList<>();		
 		
 		while (!partidaXadrez.getXequemate())
@@ -50,6 +50,13 @@ public class aula_166
 				if (pecaCapturada != null)
 				{
 					capturas.add(pecaCapturada);
+				}
+				
+				if (partidaXadrez.getPromocao() != null)
+				{
+					System.out.print("Digite um peça para promoção (B/C/R/T): ");
+					String tipo = sc.nextLine();
+					partidaXadrez.trocarPecaPromovida(tipo.toLowerCase());
 				}
 			}
 			catch(aula_156_ExcecaoXadrez e)
