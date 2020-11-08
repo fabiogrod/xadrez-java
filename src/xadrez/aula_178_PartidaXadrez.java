@@ -1,6 +1,5 @@
 package xadrez;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +14,7 @@ import xadrez.pecas.aula_169_Bispo;
 import xadrez.pecas.aula_170_Cavalo;
 import xadrez.pecas.aula_171_Rainha;
 
-public class aula_176_PartidaXadrez
+public class aula_178_PartidaXadrez
 {
 	private int turno;
 	private aula_151_Cor jogadorAtual;
@@ -28,7 +27,7 @@ public class aula_176_PartidaXadrez
 	private List<aula_157_Peca> pecasTabuleiro  = new ArrayList<>();
 	private List<aula_157_Peca> pecasCapturadas  = new ArrayList<>();
 	
-	public aula_176_PartidaXadrez()
+	public aula_178_PartidaXadrez()
 	{
 		tabuleiro = new aula_156_Tabuleiro( 8, 8);
 		turno = 1;
@@ -151,7 +150,8 @@ public class aula_176_PartidaXadrez
 		}
 		if (!tipo.equals("b") && !tipo.equals("c") && !tipo.equals("r") && !tipo.equals("t"))
 		{
-			throw new InvalidParameterException("Tipo inválido para promoção");
+			//throw new InvalidParameterException("Tipo inválido para promoção");
+			return promocao;
 		}
 		
 		aula_159_Posicao posicao = promocao.getPosicionamentoXadrez().convertePosicao();
