@@ -4,12 +4,16 @@ import tabuleiro.aula_156_Tabuleiro;
 import tabuleiro.aula_159_Posicao;
 import xadrez.aula_151_Cor;
 import xadrez.aula_167_PecaXadrez;
+import xadrez.aula_175_PartidaXadrez;
 
-public class aula_168_Peao extends aula_167_PecaXadrez
+public class aula_174_Peao extends aula_167_PecaXadrez
 {	
-	public aula_168_Peao(aula_156_Tabuleiro tabuleiro, aula_151_Cor cor)
+	private aula_175_PartidaXadrez partidaXadrez;
+	
+	public aula_174_Peao(aula_156_Tabuleiro tabuleiro, aula_151_Cor cor, aula_175_PartidaXadrez partidaXadrez)
 	{
 		super(tabuleiro, cor);
+		this.partidaXadrez = partidaXadrez;
 	}
 	
 	@Override
@@ -45,6 +49,22 @@ public class aula_168_Peao extends aula_167_PecaXadrez
 			{
 				matriz[peca.getLinha()][peca.getColuna()] = true;
 			}
+			
+			//jogada especial en passant
+			if(posicao.getLinha() == 3)
+			{
+				aula_159_Posicao esquerda = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() - 1);
+				if(getTabuleiro().posicaoExistente(esquerda) && verificaPecaOponente(esquerda) && getTabuleiro().peca(esquerda) == partidaXadrez.getEnPassant())	
+				{
+					matriz[esquerda.getLinha() - 1][esquerda.getColuna()] = true;
+				}
+				
+				aula_159_Posicao direita = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() + 1);
+				if(getTabuleiro().posicaoExistente(direita) && verificaPecaOponente(direita) && getTabuleiro().peca(direita) == partidaXadrez.getEnPassant())	
+				{
+					matriz[direita.getLinha() - 1][direita.getColuna()] = true;
+				}
+			}
 		}
 		else 
 		{
@@ -71,6 +91,22 @@ public class aula_168_Peao extends aula_167_PecaXadrez
 			if (getTabuleiro().posicaoExistente(peca) && verificaPecaOponente(peca))
 			{
 				matriz[peca.getLinha()][peca.getColuna()] = true;
+			}
+			
+			//jogada especial en passant
+			if(posicao.getLinha() == 4)
+			{
+				aula_159_Posicao esquerda = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() - 1);
+				if(getTabuleiro().posicaoExistente(esquerda) && verificaPecaOponente(esquerda) && getTabuleiro().peca(esquerda) == partidaXadrez.getEnPassant())	
+				{
+					matriz[esquerda.getLinha() + 1][esquerda.getColuna()] = true;
+				}
+				
+				aula_159_Posicao direita = new aula_159_Posicao(posicao.getLinha(), posicao.getColuna() + 1);
+				if(getTabuleiro().posicaoExistente(direita) && verificaPecaOponente(direita) && getTabuleiro().peca(direita) == partidaXadrez.getEnPassant())	
+				{
+					matriz[direita.getLinha() + 1][direita.getColuna()] = true;
+				}
 			}
 		}
 		

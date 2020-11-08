@@ -9,29 +9,30 @@ import tabuleiro.aula_157_Peca;
 import tabuleiro.aula_159_Posicao;
 import xadrez.pecas.aula_159_Torre;
 import xadrez.pecas.aula_172_Rei;
-import xadrez.pecas.aula_168_Peao;
+import xadrez.pecas.aula_174_Peao;
 import xadrez.pecas.aula_169_Bispo;
 import xadrez.pecas.aula_170_Cavalo;
 import xadrez.pecas.aula_171_Rainha;
-import xadrez.aula_173_PartidaXadrez;
 
-public class aula_173_PartidaXadrez
+public class aula_175_PartidaXadrez
 {
 	private int turno;
 	private aula_151_Cor jogadorAtual;
 	private aula_156_Tabuleiro tabuleiro;
 	private boolean xeque;
 	private boolean xequemate;
+	private aula_167_PecaXadrez enPassant; 
 	
 	private List<aula_157_Peca> pecasTabuleiro  = new ArrayList<>();
 	private List<aula_157_Peca> pecasCapturadas  = new ArrayList<>();
 	
-	public aula_173_PartidaXadrez()
+	public aula_175_PartidaXadrez()
 	{
 		tabuleiro = new aula_156_Tabuleiro( 8, 8);
 		turno = 1;
 		jogadorAtual = aula_151_Cor.BRANCA;
 		xeque = false;
+		enPassant = null;
 		configInicial();
 	}
 	
@@ -69,6 +70,11 @@ public class aula_173_PartidaXadrez
 		return xequemate;
 	}
 	
+	public aula_167_PecaXadrez getEnPassant()
+	{
+		return enPassant;
+	}
+	
 	public boolean[][] movimentosPossiveis(aula_154_PosicionamentoXadrez posicaoOrigem)
 	{
 		aula_159_Posicao posicao = posicaoOrigem.convertePosicao();
@@ -90,6 +96,9 @@ public class aula_173_PartidaXadrez
 			throw new aula_156_ExcecaoXadrez("Não é permitido que o jogador se coloque em xeque");
 		}
 		
+		aula_167_PecaXadrez pecaMovida = (aula_167_PecaXadrez)tabuleiro.peca(destino);
+		
+		
 		xeque = (testeXeque(oponente(jogadorAtual) ) ) ? true : false;
 		
 		if (testeXequemate(oponente(jogadorAtual)))
@@ -101,6 +110,16 @@ public class aula_173_PartidaXadrez
 			proximoTurno();
 		}		
 		
+		//jogada especial en passant
+		if (pecaMovida instanceof aula_174_Peao && (destino.getLinha() == origem.getLinha() - 2 || destino.getLinha() == origem.getLinha()+ 2))
+		{
+			enPassant = pecaMovida;
+		}
+		else
+		{
+			enPassant = null;
+		}
+				
 		return (aula_167_PecaXadrez) pecaCapturada;		
 	}
 	
@@ -139,6 +158,27 @@ public class aula_173_PartidaXadrez
 			torre.somarContagemMovimentos();
 		}
 		
+		// jogada especial en passant
+		if(peca instanceof aula_174_Peao)
+		{
+			if (origem.getColuna() != destino.getColuna() && pecaCapturada == null)
+			{
+				aula_159_Posicao posicaoPeao;
+				if(peca.getCor() == aula_151_Cor.BRANCA)
+				{
+					posicaoPeao = new aula_159_Posicao(destino.getLinha() + 1, destino.getColuna());
+				}
+				else
+				{
+					posicaoPeao = new aula_159_Posicao(destino.getLinha() - 1, destino.getColuna());
+				}
+				
+				pecaCapturada = tabuleiro.removerPeca(posicaoPeao);
+				pecasCapturadas.add(pecaCapturada);
+				pecasTabuleiro.remove(pecaCapturada);
+			}
+		}
+		
 		return pecaCapturada;
 	}
 	
@@ -175,6 +215,25 @@ public class aula_173_PartidaXadrez
 			aula_167_PecaXadrez torre = (aula_167_PecaXadrez)tabuleiro.removerPeca(destinoT);
 			tabuleiro.posicionarPeca(torre, origemT);
 			torre.subtrairContagemMovimentos();
+		}
+		
+		// jogada especial en passant
+		if(peca instanceof aula_174_Peao)
+		{
+			if (origem.getColuna() != destino.getColuna() && pecaCapturada == enPassant)
+			{
+				aula_167_PecaXadrez peao = (aula_167_PecaXadrez)tabuleiro.removerPeca(destino);
+				aula_159_Posicao posicaoPeao;
+				if(peca.getCor() == aula_151_Cor.BRANCA)
+				{
+					posicaoPeao = new aula_159_Posicao(3, destino.getColuna());
+				}
+				else
+				{
+					posicaoPeao = new aula_159_Posicao(4, destino.getColuna());
+				}				
+				tabuleiro.posicionarPeca(peao, posicaoPeao);				
+			}
 		}
 	}
 	
@@ -294,14 +353,14 @@ public class aula_173_PartidaXadrez
 		posicionaNovaPeca('f', 1, new aula_169_Bispo(tabuleiro, aula_151_Cor.BRANCA));
 		posicionaNovaPeca('g', 1, new aula_170_Cavalo(tabuleiro, aula_151_Cor.BRANCA));
         posicionaNovaPeca('h', 1, new aula_159_Torre(tabuleiro, aula_151_Cor.BRANCA));
-        posicionaNovaPeca('a', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
-        posicionaNovaPeca('b', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
-        posicionaNovaPeca('c', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
-        posicionaNovaPeca('d', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
-        posicionaNovaPeca('e', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
-        posicionaNovaPeca('f', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
-        posicionaNovaPeca('g', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));
-        posicionaNovaPeca('h', 2, new aula_168_Peao(tabuleiro, aula_151_Cor.BRANCA));        
+        posicionaNovaPeca('a', 2, new aula_174_Peao(tabuleiro, aula_151_Cor.BRANCA, this));
+        posicionaNovaPeca('b', 2, new aula_174_Peao(tabuleiro, aula_151_Cor.BRANCA, this));
+        posicionaNovaPeca('c', 2, new aula_174_Peao(tabuleiro, aula_151_Cor.BRANCA, this));
+        posicionaNovaPeca('d', 2, new aula_174_Peao(tabuleiro, aula_151_Cor.BRANCA, this));
+        posicionaNovaPeca('e', 2, new aula_174_Peao(tabuleiro, aula_151_Cor.BRANCA, this));
+        posicionaNovaPeca('f', 2, new aula_174_Peao(tabuleiro, aula_151_Cor.BRANCA, this));
+        posicionaNovaPeca('g', 2, new aula_174_Peao(tabuleiro, aula_151_Cor.BRANCA, this));
+        posicionaNovaPeca('h', 2, new aula_174_Peao(tabuleiro, aula_151_Cor.BRANCA, this));        
 
         posicionaNovaPeca('a', 8, new aula_159_Torre(tabuleiro, aula_151_Cor.PRETA));
         posicionaNovaPeca('b', 8, new aula_170_Cavalo(tabuleiro, aula_151_Cor.PRETA));
@@ -311,13 +370,13 @@ public class aula_173_PartidaXadrez
         posicionaNovaPeca('f', 8, new aula_169_Bispo(tabuleiro, aula_151_Cor.PRETA));
         posicionaNovaPeca('g', 8, new aula_170_Cavalo(tabuleiro, aula_151_Cor.PRETA));
         posicionaNovaPeca('h', 8, new aula_159_Torre(tabuleiro, aula_151_Cor.PRETA));
-        posicionaNovaPeca('a', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
-        posicionaNovaPeca('b', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
-        posicionaNovaPeca('c', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
-        posicionaNovaPeca('d', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
-        posicionaNovaPeca('e', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
-        posicionaNovaPeca('f', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
-        posicionaNovaPeca('g', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));
-        posicionaNovaPeca('h', 7, new aula_168_Peao(tabuleiro, aula_151_Cor.PRETA));        
+        posicionaNovaPeca('a', 7, new aula_174_Peao(tabuleiro, aula_151_Cor.PRETA, this));
+        posicionaNovaPeca('b', 7, new aula_174_Peao(tabuleiro, aula_151_Cor.PRETA, this));
+        posicionaNovaPeca('c', 7, new aula_174_Peao(tabuleiro, aula_151_Cor.PRETA, this));
+        posicionaNovaPeca('d', 7, new aula_174_Peao(tabuleiro, aula_151_Cor.PRETA, this));
+        posicionaNovaPeca('e', 7, new aula_174_Peao(tabuleiro, aula_151_Cor.PRETA, this));
+        posicionaNovaPeca('f', 7, new aula_174_Peao(tabuleiro, aula_151_Cor.PRETA, this));
+        posicionaNovaPeca('g', 7, new aula_174_Peao(tabuleiro, aula_151_Cor.PRETA, this));
+        posicionaNovaPeca('h', 7, new aula_174_Peao(tabuleiro, aula_151_Cor.PRETA, this));        
 	}
 }
